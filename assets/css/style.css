@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Source+Sans+Pro&display=swap');
+
+* {
+    font-family: 'Source Sans Pro', 'Arial Narrow', Calibri;
+}
+
+*::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --hue-neutral: 200;
+    --hue-wrong: 0;
+    --hue-correct: 145;
+}
+
+/* temporary navigation */
+
+.temp-div {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 2px;
+}
+
+.temp-list {
+    list-style-type: none;
+}
+
+.temp-list li {
+  float: right;
+  margin-right: 30px;
+}
+
+.temp-list a {
+    text-decoration: none;
+    text-align: inline;
+    color: white;
+}
+
+body {
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 100%, 95%);
+}
+
+body.correct {
+    --hue: var(--hue-correct);
+}
+
+body.wrong {
+    --hue: var(--hue-wrong);
+}
+
+.welcome {
+    font-size: 4rem;
+    font-family: 'Lobster', 'Source Sans Pro', Calibri;
+    color: rgb(255, 255, 255);
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.index-image {
+    background-image: url("../images/background-clear.jpg");
+    background-size: cover;
+}
+
+.background-blurry {
+    background-image: url("../images/background-blurry.jpg");
+    background-size: cover;
+}
+
+.top-spacing {
+    margin-top: 15rem;
+}
+
+.container {
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.no-style {
+    text-decoration: none;
+    text-align: center;
+}
+
+#question {
+    font-size: 2rem;
+    font-family: 'Lobster', 'Source Sans Pro', Calibri;
+}
+
+#question-text {
+    font-size: 1.5rem;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+    font-size: 1.5rem;
+    --hue: var(--hue-neutral);
+    border: 1px solid hsl(var(--hue), 100%, 30%);
+    background-color: hsl(var(--hue), 100%, 60%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.btn.correct {
+    --hue: var(--hue-correct);
+    color: black;
+}
+
+.btn.wrong {
+    --hue: var(--hue-wrong);
+}
+
+.start-btn, .next-btn {
+    font-size: 2.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-family: 'Lobster', 'Source Sans Pro', Calibri;
+    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+}
+
+.controlls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+
+.victory-question {
+    font-size: 1.5rem;
+    text-align: center;
+    color: black;
+    font-style: italic;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
