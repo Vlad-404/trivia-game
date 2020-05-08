@@ -23,7 +23,7 @@ Contents:
 # UX 
 
 ## Idea:
-Idea behind this project was to create a simple game of trivia to provide an entertainment for one person or a group of people. Multiple people can compete in this game as the counter for correct answers is located at the bottom right corner of the screen. This way, a game like this can add additional entertainment for a group of people and add a competitive spirit to any party.
+Idea behind this project was to create a simple game of trivia based on "Who wants to be a millionaire" game show. It can provide an entertainment for one person or a group of people. Multiple people can compete in this game as the counter for correct answers is located at the bottom right corner of the screen. This way, a game like this can add additional entertainment for a group of people and add a competitive spirit to any party.
 
 Targeted audience is everyone over the age of 16, as some questions won't be familiar with the younger audience, especially questions that have older date. 
 
@@ -49,7 +49,9 @@ Before starting this project, some research and these steps were taken:
 
 ### Wireframes
 
-After the initial idea, I decided to make a couple of sketches and make wireframes for different platforms to have an idea how will the page look like on different platforms. I decided to opt out of Bootstrap as the page is simple enough to have my own code and don't have a clash with Bootstrap on any my own classes. That's why I have only one media querry. 
+After the initial idea, I decided to make a couple of sketches and make wireframes for different platforms to have an idea how will the page look like on different platforms. Software used for generating mockups was [Balsamiq](https://balsamiq.com/?gclid=EAIaIQobChMIzK-ozrWk6QIVF-vtCh1l-woMEAAYASAAEgJ_vvD_BwE). 
+
+I decided to opt out of Bootstrap as the page is simple enough to have my own code and don't have a clash with Bootstrap on any of my own classes. That's why I have only one media querry which proved to be simple and effective enough.
 
 You can find all the wireframes in the [wireframes](https://github.com/Vlad-404/trivia-game/tree/master/wireframes) folder.
 
@@ -77,13 +79,25 @@ The following fonts were chosen for the game:
 
 Choice of colours were brought down to a minimum as game of this kind needs just a handfull of colours .
 
-* neutral colour - blue HSL(200, 100%, 95%) - used for all screens except right and wrong answers excluding victory screen
-* right answer - green HSL(145, 100%, 95%) - right answer
-* wrong answer - red HSL() - wrong answer
+* neutral colour - blue #33BBFF - answer buttons, welcome and victory screen buttons
+* right answer - green #33FF88 - right answer
+* wrong answer - red #FF3333 - wrong answer
 
-HSL color selection was used because it was easier to manipulate the colour changes using JavaScript/jQuerry
+HSL color selection was used because it was easier to manipulate the colour changes using JavaScript/jQuerry. Also,I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
 
 ### Icons
 
 Icons were used from a FontAwesome page for correct and incorrect answers and for a timer. Thumbs up as a assotiation with correct and thumbs down for wrong answer. In addition, icon for a clock was used for a timer.
 
+# Features
+
+Trivia games have a simple nature so this project was focused on basic things working as best as possible:
+
+* one screen leads you seemlesly into another one so there is no need for navigation.
+* Each button leads you to only logicall place you can go, so there is no need for navigation: i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is inaccessible once you start the game as it is irrelevant once you start the game.
+* there is a victory checkup to prevent user accessing victory screen without having the winner condition in current category.
+* there is a correct answer counter and total number of questions so this game can be played even with multiple people. Correct answers can be used as a point system in possible multiplayer environment.
+* check mechanic was added to prevent people from going back or forward on a page to get a correct answer/skip a question once they start the game. Once user goes back, warning is displayed and if user chooses to ignore it, progress is reset.
+* correct answer wasn't offered once user selects the wrong one, because I wanted to discourage the user from getting the answer from the game by cheating, and using it later.
+* refreshing page leaves user with the same question and saves the progress - another anti-cheat measure.
+* there are 3 levels of difficulty: once game starts, every 5 questions, game pulls questions from a poll of increasingly difficult questions. There are 15 questions in each category per session. As there are many questions from the database, each question is randomly chosen from a category depending on difficulty.
