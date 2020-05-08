@@ -12,9 +12,13 @@ Contents:
     * Wireframes
   * User stories
   * Design choices
-    * Colours
     * Fonts
+    * Colours
     * Icons
+* Features
+    * Features left to implement
+
+* Technologies used
 
 .
 .
@@ -22,7 +26,7 @@ Contents:
 
 # UX 
 
-## Idea:
+## Idea
 Idea behind this project was to create a simple game of trivia based on "Who wants to be a millionaire" game show. It can provide an entertainment for one person or a group of people. Multiple people can compete in this game as the counter for correct answers is located at the bottom right corner of the screen. This way, a game like this can add additional entertainment for a group of people and add a competitive spirit to any party.
 
 Targeted audience is everyone over the age of 16, as some questions won't be familiar with the younger audience, especially questions that have older date. 
@@ -38,7 +42,7 @@ This project will provide a good fun and be interesting to users because of the 
 
 After visiting this page, users will be more knowledgable in selected categories.
 
-## Research and preparations:
+## Research and preparations
 
 Before starting this project, some research and these steps were taken:
 
@@ -67,6 +71,8 @@ You can find all the wireframes in the [wireframes](https://github.com/Vlad-404/
 
 As the idea behind this project is simplicity, a simple background with a theme of jeopardy was chosen as to associate with quiz shows.
 
+A single page was chosen as there was no need for multiple ones and it speeds up loading times. Different screens were achieved with jQuerry toggling the hide class on and off for each container depending whether it's needed or not.
+
 ### Fonts
 
 The following fonts were chosen for the game:
@@ -93,11 +99,33 @@ Icons were used from a FontAwesome page for correct and incorrect answers and fo
 
 Trivia games have a simple nature so this project was focused on basic things working as best as possible:
 
-* one screen leads you seemlesly into another one so there is no need for navigation.
-* Each button leads you to only logicall place you can go, so there is no need for navigation: i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is inaccessible once you start the game as it is irrelevant once you start the game.
+* one screen leads you seemlesly into another one so there is no need for navigation. Each button leads you to only logicall place you can go, i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is inaccessible once you start the game as it is irrelevant once you start the game.
 * there is a victory checkup to prevent user accessing victory screen without having the winner condition in current category.
 * there is a correct answer counter and total number of questions so this game can be played even with multiple people. Correct answers can be used as a point system in possible multiplayer environment.
 * check mechanic was added to prevent people from going back or forward on a page to get a correct answer/skip a question once they start the game. Once user goes back, warning is displayed and if user chooses to ignore it, progress is reset.
-* correct answer wasn't offered once user selects the wrong one, because I wanted to discourage the user from getting the answer from the game by cheating, and using it later.
+* correct answer wasn't offered once user selects the wrong one. I wanted to discourage the user from getting the correct answer from the game by cheating, and using it later.
 * refreshing page leaves user with the same question and saves the progress - another anti-cheat measure.
 * there are 3 levels of difficulty: once game starts, every 5 questions, game pulls questions from a poll of increasingly difficult questions. There are 15 questions in each category per session. As there are many questions from the database, each question is randomly chosen from a category depending on difficulty.
+* a timer is used to give user 12 seconds to read and answer the question. If answer isn't selected in that time, wrong answer screen pops up and points a user to category selection. No answer is selected in this case, only wrong answer screen.
+
+## Features left to implement
+
+...
+
+# Technologies used
+
+## Languages
+
+* HTML
+* CSS
+* JavaScript
+* JSON
+
+## Libraries
+
+* [Git](https://git-scm.com/)
+* [JQuerry](https://jquery.com/)
+* [Font Awesome](https://fontawesome.com/)
+* [Google Fonts](https://fonts.google.com/)
+...
+
