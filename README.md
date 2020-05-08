@@ -8,7 +8,14 @@ Welcome to the first game I made. I hope you will enjoy it.
 Contents:
 * UX (user experience)
   * Idea
-  * 
+  * Research and preparations
+    * Wireframes
+  * User stories
+  * Design choices
+    * Colours
+    * Fonts
+    * Icons
+
 .
 .
 .
@@ -39,6 +46,12 @@ Before starting this project, some research and these steps were taken:
 * looking for videos on YouTube to find the best approach to the subject
 * mockups were generated to have an idea how the game will look like on different platforms. You can find them in folder [Wireframes](https://github.com/Vlad-404/trivia-game/tree/master/wireframes)
 * after find the right API for the questions database, these categories were chosen:...(add categories after choosing) because(reason)...
+
+### Wireframes
+
+After the initial idea, I decided to make a couple of sketches and make wireframes for different platforms to have an idea how will the page look like on different platforms. I decided to opt out of Bootstrap as the page is simple enough to have my own code and don't have a clash with Bootstrap on any my own classes. That's why I have only one media querry. 
+
+You can find all the wireframes in the [wireframes](https://github.com/Vlad-404/trivia-game/tree/master/wireframes) folder.
 
 ## User stories
 
