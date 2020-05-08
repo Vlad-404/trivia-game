@@ -21,6 +21,7 @@ Contents:
 * Testing
     * User stories Testing
     * Left out implementations
+* Deployment
 * Credits
     *
 
@@ -125,7 +126,7 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * JavaScript
 * JSON
 
-## Libraries
+## Libraries and tools
 
 * [Git](https://git-scm.com/)
 * [JQuerry](https://jquery.com/)
@@ -175,10 +176,17 @@ When deploying Trivia Game using GitHub Pages the following steps were made:
 
 Content for this game was based on "Who wants to be a millionaire" and the content was used from following sources:
 * [Open Trivia DB](https://opentdb.com/) - pulled the questions through their API
-* 
 
 ## Media 
 
+Only image used as a background was used from free wallpaper website: https://wallpapersafari.com/w/fW7pva. I used Gimp to add blurry effect for the questions background.
+
 ## Acknowledgments and thank you's:
 
+- Huge thank you to my mentor Simen for helping me chose the topic and providing a starting resources.
+- big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who provide their resources for free.
+- ...
+
 # Disclaimer
+
+This page was built for educational purposes and all resources were used under fair usage and/or under free licence! If you find any content that violates the copyrights, please contact me on vmijat21@gmail.com
