@@ -23,11 +23,10 @@ Contents:
     * Left out implementations
 * Deployment
 * Credits
-    *
-
-.
-.
-.
+    * Content
+    * Media
+    * Acknowledgments and thank you's
+* Disclaimer
 
 # UX 
 
@@ -181,7 +180,7 @@ Content for this game was based on "Who wants to be a millionaire" and the conte
 
 Only image used as a background was used from free wallpaper website: https://wallpapersafari.com/w/fW7pva. I used Gimp to add blurry effect for the questions background.
 
-## Acknowledgments and thank you's:
+## Acknowledgments and thank you's
 
 - Huge thank you to my mentor Simen for helping me chose the topic and providing a starting resources.
 - big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who provide their resources for free.
@@ -190,3 +189,5 @@ Only image used as a background was used from free wallpaper website: https://wa
 # Disclaimer
 
 This page was built for educational purposes and all resources were used under fair usage and/or under free licence! If you find any content that violates the copyrights, please contact me on vmijat21@gmail.com
+
+Thank you for visiting my page and I hope you'll have fun playing the game.
