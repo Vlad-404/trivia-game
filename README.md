@@ -129,3 +129,22 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * [Google Fonts](https://fonts.google.com/)
 ...
 
+# Testing
+
+...
+
+## User stories Testing
+
+1. As a new visitor to the page, I want to be able to play a simple trivia game without too much hassle.
+    * game was made so that the navigation is unnecessary, as each time user is presented with a choice, it leads user to only logical place. i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is inaccessible once you start the game as it is irrelevant once you start the game.
+2. As a new visitor to the page, I wanted to find a simple game of trivia so I can add some additional entertainment for us and our guests.
+    * a competitive feature was added in a shape of correct answer counter. This can be used a point system in multiplayer environment.
+3. As a returning visitor, I don't want to have same questions over and over again, but instead, I want new ones.
+    * chosen database/API have lots of different questions with different difficulties. Each time game randomly pulls a question in regard to the difficulty so each game has different questions each time it's started
+4. As the game gets it's questions from an open database that gets new questions added daily, returning visitors can still be surprised by new questions
+    * as explained in the story above, game randomly pulls a question in regard to the difficulty and category so questions won't be repeating for a long time.
+5. As a new user, I want to find a way to compete in knowledge with certain topics, so my freind and I can finally find out who knows games better.
+    * as explained in 2nd point of user stories, correct answer counter was added to serve as a point system. Person who has more points, wins.
+
+## Left out implementations
+
