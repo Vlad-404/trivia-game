@@ -17,8 +17,12 @@ Contents:
     * Icons
 * Features
     * Features left to implement
-
 * Technologies used
+* Testing
+    * User stories Testing
+    * Left out implementations
+* Credits
+    *
 
 .
 .
@@ -147,4 +151,34 @@ Trivia games have a simple nature so this project was focused on basic things wo
     * as explained in 2nd point of user stories, correct answer counter was added to serve as a point system. Person who has more points, wins.
 
 ## Left out implementations
+...
 
+# Deployment
+
+Trivia game was developed on GitPod and VS code, using git and GitHub to host the repository.
+
+When deploying Trivia Game using GitHub Pages the following steps were made:
+
+* Opened up <strong>[GitHub](github.com)</strong> in the browser.
+* Signed in using username and password.
+* Selected my <strong>repositories</strong>.
+* Navigated to <strong>'/Vlad-404/trivia-game'</strong>.
+* In the top navigation clicked <strong>'settings'</strong>.
+* Scrolled down to the <strong>GitHub Pages</strong> area. 
+* Selected <strong>'Master Branch'</strong> from the <strong>'Source'</strong> dropdown menu.
+* Clicked to confirm my selection.
+* Trivia game is now live on GitHub Pages.
+
+# Credits
+
+## Content
+
+Content for this game was based on "Who wants to be a millionaire" and the content was used from following sources:
+* [Open Trivia DB](https://opentdb.com/) - pulled the questions through their API
+* 
+
+## Media 
+
+## Acknowledgments and thank you's:
+
+# Disclaimer
