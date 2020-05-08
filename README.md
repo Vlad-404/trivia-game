@@ -62,7 +62,7 @@ The following fonts were chosen for the game:
 
 ### Colours
 
-Choice of colours were brought down to a minimum as game of this kind needs colours for neutral, correct answer and wrong answer.
+Choice of colours were brought down to a minimum as game of this kind needs just a handfull of colours .
 
 * neutral colour - blue HSL(200, 100%, 95%) - used for all screens except right and wrong answers excluding victory screen
 * right answer - green HSL(145, 100%, 95%) - right answer
@@ -72,4 +72,5 @@ HSL color selection was used because it was easier to manipulate the colour chan
 
 ### Icons
 
-Icons were used from a FontAwesome page for correct and incorrect answers and for a timer.
+Icons were used from a FontAwesome page for correct and incorrect answers and for a timer. Thumbs up as a assotiation with correct and thumbs down for wrong answer. In addition, icon for a clock was used for a timer.
+
