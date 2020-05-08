@@ -48,3 +48,28 @@ Before starting this project, some research and these steps were taken:
 4. As the game gets it's questions from an open database that gets new questions added daily, returning visitors can still be surprised by new questions
 5. As a new user, I want to find a way to compete in knowledge with certain topics, so my freind and I can finally find out who knows games better.
 
+## Design choices
+
+As the idea behind this project is simplicity, a simple background with a theme of jeopardy was chosen as to associate with quiz shows.
+
+### Fonts
+
+The following fonts were chosen for the game:
+
+- [Lobster](https://fonts.google.com/specimen/Lobster) - this font was is used for titles, and all text that is meant to be large and quirky to motivate playfullnes.
+- [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro) - this font was used in questions, answers and everywhere where readability was a priority
+- Calibri - a backup font if other two fail to load.
+
+### Colours
+
+Choice of colours were brought down to a minimum as game of this kind needs colours for neutral, correct answer and wrong answer.
+
+* neutral colour - blue HSL(200, 100%, 95%) - used for all screens except right and wrong answers excluding victory screen
+* right answer - green HSL(145, 100%, 95%) - right answer
+* wrong answer - red HSL() - wrong answer
+
+HSL color selection was used because it was easier to manipulate the colour changes using JavaScript/jQuerry
+
+### Icons
+
+Icons were used from a FontAwesome page for correct and incorrect answers and for a timer.
