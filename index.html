@@ -16,9 +16,6 @@
         <nav class="temp-div">
             <ul class="temp-list">
                 <li id="link-victory">victory</li>
-                <li id="link-questions">questions</li>
-                <li id="link-categories">categories</li>
-                <li id="link-index">index</li>
             </ul>
         </nav>
 
@@ -41,24 +38,24 @@
                 <div class="question-title">Please select a category:</div>
                     
                 <div class="btn-grid top-spacing">
-                    <button class="btn no-style">Category1</button>
-                    <button class="btn no-style">Category2</button>
-                    <button class="btn no-style">Category3</button>
-                    <button class="btn no-style">Category4</button>
+                    <button class="btn no-style category-btn">Category1</button>
+                    <button class="btn no-style category-btn">Category2</button>
+                    <button class="btn no-style category-btn">Category3</button>
+                    <button class="btn no-style category-btn">Category4</button>
                 </div>
             </div>
         </div>
 
     <!-- Question screen -->
 
-        <div id="questions" class="container hide">
+        <div id="question-wrapper" class="container hide">
 
             <div id="question-container">
                 <div class="question-title">Question:</div>
-                <p id="question">
+                <div id="question">
                     What is the right answer?
-                </p>
-                <div id="answer" class="btn-grid">
+                </div>
+                <div id="answers" class="btn-grid">
                     <button class="btn">Answer1</button>
                     <button class="btn">Answer2</button>
                     <button class="btn">Answer3</button>
@@ -67,8 +64,8 @@
             </div>
 
             <div class="controlls">
-                <button id="next-btn" class="question-btn btn">Next</button>
-                <button id="restart-btn" class="question-btn btn">Restart</button>
+                <button id="next-btn" class="question-btn btn hide">Next</button>
+                <button id="restart-btn" class="question-btn btn hide">Restart</button>
                 <button id="counter-btn" class="question-btn btn">10 s</button>
             </div>
 
