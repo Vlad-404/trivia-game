@@ -21,7 +21,7 @@
         </nav>
 
     <!-- Welcome screen  -->
-        <div>
+        <div class="hide">
             <div>
                 <h1 class="welcome top-spacing">Welcome to the Super Awesome Trivia game!</h1>
             </div>
@@ -35,12 +35,12 @@
 
     <!-- Category selection -->
 
-         <div class="container hide">
+         <div class="container">
 
-            <div id="question-container"></div>
-                <div id="question">Please select a category:</div>
+            <div id="category-selection"></div>
+                <div class="question-title">Please select a category:</div>
                     
-                <div id="answer" class="btn-grid top-spacing">
+                <div class="btn-grid top-spacing">
                         <a href="questions.html" class="btn no-style">Category1</a>
                         <a href="questions.html" class="btn no-style">Category2</a>
                         <a href="questions.html" class="btn no-style">Category3</a>
@@ -55,8 +55,8 @@
         <div class="container hide">
 
             <div id="question-container">
-                <div id="question">Question:</div>
-                <p id="question-text">
+                <div class="question-title">Question:</div>
+                <p id="question">
                     What is the right answer?
                 </p>
                 <div id="answer" class="btn-grid">
