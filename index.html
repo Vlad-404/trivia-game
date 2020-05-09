@@ -28,14 +28,14 @@
 
             <div class="controlls top-spacing">
                 <a href="categories.html">
-                    <button id="next-btn" class="next-btn btn">Start</button>
+                    <button class="question-btn btn">Start</button>
                 </a>
             </div>
         </div>
 
     <!-- Category selection -->
 
-         <div class="container">
+         <div class="container hide">
 
             <div id="category-selection"></div>
                 <div class="question-title">Please select a category:</div>
@@ -68,16 +68,16 @@
             </div>
 
             <div class="controlls">
-                <button id="next-btn" class="next-btn btn hide">Next</button>
-                <button id="restart-btn" class="next-btn btn hide">Restart</button>
-                <button id="counter-btn" class="counter-btn btn">10 s</button>
+                <button id="next-btn" class="question-btn btn hide">Next</button>
+                <button id="restart-btn" class="question-btn btn hide">Restart</button>
+                <button id="counter-btn" class="question-btn btn">10 s</button>
             </div>
 
         </div>
 
     <!-- Victory screen -->
 
-        <div class="hide">
+        <div>
             <div>
                 <h1 class="welcome top-spacing">CONGRATULATIONS! You won!</h1>
                 <p class="victory-question">How about trying another category?</p>
@@ -85,9 +85,14 @@
 
             <div class="controlls top-spacing">
                 <a href="categories.html">
-                    <button id="next-btn" class="next-btn btn">Pick another category</button>
+                    <button class="question-btn btn">Pick another category</button>
                 </a>
             </div>
+        </div>
+
+    <!-- Question counter -->
+        <div id="question-counter">
+            <p class="answer-counter">Correct answers/total answers:<span id="counter">   12/25</span></p>
         </div>
     
         
