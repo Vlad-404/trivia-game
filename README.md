@@ -75,7 +75,7 @@ You can find all the wireframes in the [wireframes](https://github.com/Vlad-404/
 
 As the idea behind this project is simplicity, a simple background with a theme of jeopardy was chosen as to associate with quiz shows.
 
-A single page was chosen as there was no need for multiple ones and it speeds up loading times. Different screens were achieved with jQuerry toggling the hide class on and off for each container depending whether it's needed or not.
+A single page was chosen as there was no need for multiple ones and it speeds up loading times. Different screens were achieved with JavaScript toggling the hide class on and off for each container depending whether it's needed or not.
 
 ### Fonts
 

@@ -19,7 +19,8 @@
                 <li><a href="victory.html">victory</a></li>
             </ul>
         </nav>
-    <!-- rest of the code -->
+
+    <!-- Welcome screen  -->
         <div>
             <div>
                 <h1 class="welcome top-spacing">Welcome to the Super Awesome Trivia game!</h1>
@@ -31,6 +32,64 @@
                 </a>
             </div>
         </div>
+
+    <!-- Category selection -->
+
+         <div class="container hide">
+
+            <div id="question-container"></div>
+                <div id="question">Please select a category:</div>
+                    
+                <div id="answer" class="btn-grid top-spacing">
+                        <a href="questions.html" class="btn no-style">Category1</a>
+                        <a href="questions.html" class="btn no-style">Category2</a>
+                        <a href="questions.html" class="btn no-style">Category3</a>
+                        <a href="questions.html" class="btn no-style">Category4</a>
+                </div>
+            </div>
+
+        </div>
+
+    <!-- Question screen -->
+
+        <div class="container hide">
+
+            <div id="question-container">
+                <div id="question">Question:</div>
+                <p id="question-text">
+                    What is the right answer?
+                </p>
+                <div id="answer" class="btn-grid">
+                    <button class="btn">Answer1</button>
+                    <button class="btn">Answer2</button>
+                    <button class="btn">Answer3</button>
+                    <button class="btn">Answer4</button>
+                </div>
+            </div>
+
+            <div class="controlls">
+                <button id="next-btn" class="next-btn btn hide">Next</button>
+                <button id="restart-btn" class="next-btn btn hide">Restart</button>
+                <button id="counter-btn" class="counter-btn btn">10 s</button>
+            </div>
+
+        </div>
+
+    <!-- Victory screen -->
+
+        <div class="hide">
+            <div>
+                <h1 class="welcome top-spacing">CONGRATULATIONS! You won!</h1>
+                <p class="victory-question">How about trying another category?</p>
+            </div>
+
+            <div class="controlls top-spacing">
+                <a href="categories.html">
+                    <button id="next-btn" class="next-btn btn">Pick another category</button>
+                </a>
+            </div>
+        </div>
+    
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 
