@@ -15,44 +15,43 @@
     <!-- temporary navigation-->
         <nav class="temp-div">
             <ul class="temp-list">
-                <li><a href="questions.html">questions</a></li>
-                <li><a href="victory.html">victory</a></li>
+                <li id="link-victory">victory</li>
+                <li id="link-questions">questions</li>
+                <li id="link-categories"  class="hide">categories</li>
+                <li id="link-index" class="hide">index</li>
             </ul>
         </nav>
 
     <!-- Welcome screen  -->
-        <div class="hide">
+        <div id="welcome">
             <div>
                 <h1 class="welcome top-spacing">Welcome to the Super Awesome Trivia game!</h1>
             </div>
 
             <div class="controlls top-spacing">
-                <a href="categories.html">
-                    <button class="question-btn btn">Start</button>
-                </a>
+                    <button id="chose-category" class="question-btn btn">Start</button>
             </div>
         </div>
 
     <!-- Category selection -->
 
-         <div class="container hide">
+        <div id="categories" class="container hide">
 
-            <div id="category-selection"></div>
+            <div id="category-selection">
                 <div class="question-title">Please select a category:</div>
                     
                 <div class="btn-grid top-spacing">
-                        <a href="questions.html" class="btn no-style">Category1</a>
-                        <a href="questions.html" class="btn no-style">Category2</a>
-                        <a href="questions.html" class="btn no-style">Category3</a>
-                        <a href="questions.html" class="btn no-style">Category4</a>
+                    <button class="btn no-style">Category1</button>
+                    <button class="btn no-style">Category2</button>
+                    <button class="btn no-style">Category3</button>
+                    <button class="btn no-style">Category4</button>
                 </div>
             </div>
-
         </div>
 
     <!-- Question screen -->
 
-        <div class="container hide">
+        <div id="questions" class="container hide">
 
             <div id="question-container">
                 <div class="question-title">Question:</div>
@@ -68,8 +67,8 @@
             </div>
 
             <div class="controlls">
-                <button id="next-btn" class="question-btn btn hide">Next</button>
-                <button id="restart-btn" class="question-btn btn hide">Restart</button>
+                <button id="next-btn" class="question-btn btn">Next</button>
+                <button id="restart-btn" class="question-btn btn">Restart</button>
                 <button id="counter-btn" class="question-btn btn">10 s</button>
             </div>
 
@@ -77,22 +76,21 @@
 
     <!-- Victory screen -->
 
-        <div>
+        <div id="victory" class="hide">
             <div>
                 <h1 class="welcome top-spacing">CONGRATULATIONS! You won!</h1>
                 <p class="victory-question">How about trying another category?</p>
             </div>
 
             <div class="controlls top-spacing">
-                <a href="categories.html">
-                    <button class="question-btn btn">Pick another category</button>
-                </a>
+                <button id="again" class="question-btn btn">Pick another category</button>
             </div>
         </div>
 
     <!-- Question counter -->
+
         <div id="question-counter">
-            <p class="answer-counter">Correct answers/total answers:<span id="counter">   12/25</span></p>
+            <p class="answers-counter hide">Correct answers/total answers:<span id="counter" class="counter">   12</span><span class="counter">/25</span></p>
         </div>
     
         

@@ -146,14 +146,19 @@ body.wrong {
     text-align: right;
 }
 
-.answer-counter {
+.answers-counter {
     font-size: 1rem;
 }
 
 #counter {
+    color: #33FF88;
+}
+
+.counter {
     font-size: 3rem;
     font-weight: bold;
 }
+
 
 /* temporary navigation */
 
@@ -172,10 +177,7 @@ body.wrong {
 .temp-list li {
   float: right;
   margin-right: 30px;
-}
-
-.temp-list a {
-    text-decoration: none;
-    text-align: inline;
-    color: white;
+  text-decoration: none;
+  text-align: inline;
+  color: white;
 }
