@@ -35,6 +35,7 @@ body.wrong {
 }
 
 .welcome {
+    text-align: center;
     font-size: 4rem;
     font-family: 'Lobster', 'Source Sans Pro', Calibri;
     color: rgb(255, 255, 255);
@@ -157,6 +158,18 @@ body.wrong {
 .counter {
     font-size: 3rem;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 540px) {
+
+    .btn-grid {
+        display: block;
+    }
+
+    .btn-scaled {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
 
 
