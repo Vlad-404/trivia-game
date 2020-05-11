@@ -7,10 +7,12 @@ $("#chose-category").click(function() {
   
 });
 
-$(".btn-grid>.no-style").click(function() {
+$(".category-btn").click(function() {
   
   $("#categories").addClass("hide");
   $("#question-wrapper").removeClass("hide");
+  $("#link-victory").removeClass("hide");
+  $("body").removeClass("index-image").addClass("background-blurry");
   
 });
 
@@ -24,72 +26,21 @@ $("#restart-btn").click(function() {
 $("#again").click(function() {
   
   $("#victory").addClass("hide");
+  $("#link-victory").addClass("hide");
   $("#categories").removeClass("hide");
-  
+  $("body").removeClass("background-blurry").addClass("index-image");
 });
-
-$(".btn-grid>.no-style").click(function() {
-    $("body").removeClass("index-image").addClass("background-blurry");
-})
-
-$("#again").click(function() {
-    $("body").removeClass("background-blurry").addClass("index-image");
-})
 
 $("#link-victory").click(function() {
   
-  $("#welcome").addClass("hide");
-  $("categories").addClass("hide");
-  $("#questions").addClass("hide");
+  $("#question-wrapper").addClass("hide");
   $("#victory").removeClass("hide");
+  $("body").removeClass("background-blurry").addClass("index-image");
 });
 
-// variables
+// VARIABLES
 
-const nextButton = document.getElementById("next-btn")
-const questionElement = document.getElementById("question")
-const answerButtons = document.getElementById("answers")
-
-let shuffledQuestions, currentQuestionIndex
-
-//console.log(questionElement.innerText)
-
-function startGame() {
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
-    setNextQuestion()
-}
-
-function setNextQuestion () {
-    resetState()
-    showQuestion(shuffledQuestions[currentQuestionIndex])
-}
-
-function showQuestion(question) {
-    questionElement.innerText = question.question
-    question.answers.forEach(answer => {
-        const button = document.createElement("button")
-        button.innerText = answer.text
-        button.classList.add("btn")
-        if (answer.correct) {
-            button.dataset.correct = answer.correct
-        }
-        button.addEventListener("click", selectAnswer)
-        answerButtonsElement.appendChild(button)
-    })
-}
-
-function resetState() {
-    nextButton.classlist.add("hide")
-}
-
-function selectAnswer (e) {
-
-}
-
-// test questions
-
-const questions = [
+var questions = [
     {
         question: "What is 1 + 1?",
         answers: [
@@ -104,8 +55,32 @@ const questions = [
         answers: [
             {text: "To run away!", correct: false },
             {text: "To get to the other side", correct: true },
-            {text: "Who cares?", correct: false },
+            {text: "This again?", correct: false },
             {text: "7", correct: false }
         ]
     }
-]
+] 
+
+const questionElement = document.getElementById("question")
+
+var shuffledQuestions, currentQuestionIndex
+
+const answerButtonsElement  =document.getElementById("answers")
+
+// FUNCTIONS
+
+function startGame() {
+    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    currentQuestionIndex = 0
+    questionElement.classList.remove('hide')
+    setNextQuestion()
+}
+
+function setNextQuestion() {
+    showQuestion(shuffledQuestions[currentQuestionIndex])
+}
+
+function showQuestion(question) {
+    questionElement.innerText = question.question
+}
+ 
