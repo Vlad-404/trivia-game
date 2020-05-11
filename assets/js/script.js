@@ -28,6 +28,14 @@ $("#again").click(function() {
   
 });
 
+$(".btn-grid>.no-style").click(function() {
+    $("body").removeClass("index-image").addClass("background-blurry");
+})
+
+$("#again").click(function() {
+    $("body").removeClass("background-blurry").addClass("index-image");
+})
+
 $("#link-victory").click(function() {
   
   $("#welcome").addClass("hide");

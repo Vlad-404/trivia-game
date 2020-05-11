@@ -45,11 +45,13 @@ body.wrong {
 .index-image {
     background-image: url("../images/background-clear.jpg");
     background-size: cover;
+    background-position: center top;
 }
 
 .background-blurry {
     background-image: url("../images/background-blurry.jpg");
     background-size: cover;
+    background-position: center top;
 }
 
 .top-spacing {
