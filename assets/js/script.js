@@ -64,9 +64,11 @@ var questions = [
 
 const questionElement = document.getElementById("question")
 
-var shuffledQuestions, currentQuestionIndex
+const nextButton = document.getElementById('next-btn')
 
 const answerButtonsElement = document.getElementById("answers")
+
+var shuffledQuestions, currentQuestionIndex  // shuffles the questions and sets the index on the current question
 
 // FUNCTIONS
 
@@ -79,6 +81,7 @@ function startGame() {
 
 // Sets the next question randomly
 function setNextQuestion() {
+    resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
@@ -96,4 +99,11 @@ function showQuestion(question) {
         answerButtonsElement.appendChild(button)
     })
 }
- 
+
+// Resets the question screen to prepare it for new question
+function resetState() {
+    nextButton.classList.add("hide")
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+    }
+}
