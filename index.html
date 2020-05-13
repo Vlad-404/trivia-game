@@ -15,7 +15,7 @@
     <!-- temporary navigation-->
         <nav class="temp-div">
             <ul class="temp-list">
-                <li id="link-victory">victory</li>
+                <li id="link-victory" class="hide">victory</li>
             </ul>
         </nav>
 
@@ -38,10 +38,10 @@
                 <div class="question-title">Please select a category:</div>
                     
                 <div class="btn-grid top-spacing">
-                    <button class="btn no-style category-btn">Category1</button>
-                    <button class="btn no-style category-btn">Category2</button>
-                    <button class="btn no-style category-btn">Category3</button>
-                    <button class="btn no-style category-btn">Category4</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category1</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category2</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category3</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category4</button>
                 </div>
             </div>
         </div>
@@ -56,10 +56,10 @@
                     What is the right answer?
                 </div>
                 <div id="answers" class="btn-grid">
-                    <button class="btn">Answer1</button>
-                    <button class="btn">Answer2</button>
-                    <button class="btn">Answer3</button>
-                    <button class="btn">Answer4</button>
+                    <button class="btn btn-scaled">Answer1</button>
+                    <button class="btn btn-scaled">Answer2</button>
+                    <button class="btn btn-scaled">Answer3</button>
+                    <button class="btn btn-scaled">Answer4</button>
                 </div>
             </div>
 
@@ -87,13 +87,13 @@
     <!-- Question counter -->
 
         <div id="question-counter">
-            <p class="answers-counter hide">Correct answers/total answers:<span id="counter" class="counter">   12</span><span class="counter">/25</span></p>
+            <p class="answers-counter hide">Correct answers/total questions:<span id="counter" class="counter">   12</span><span class="counter">/25</span></p>
         </div>
     
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 
-        <script type="text/javascript" src ="assets/js/script.js"></script>
+        <script src ="assets/js/script.js"></script>
     </body>
 
 </html>
