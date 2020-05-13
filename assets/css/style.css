@@ -175,6 +175,18 @@ body.wrong {
     }
 }
 
+@media only screen and (max-width: 540px) {
+
+    .btn-grid {
+        display: block;
+    }
+
+    .btn-scaled {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
 
 /* temporary navigation */
 
@@ -192,7 +204,6 @@ body.wrong {
 
 .temp-list li {
   float: right;
-  margin-right: 30px;
   text-decoration: none;
   text-align: inline;
   color: white;
