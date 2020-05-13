@@ -181,13 +181,15 @@ function showQuestion(question) {
 }
 
 // Countdown timer
-let timeLeft = 10;
-let minusTime = setInterval(function() {
-    if(timeLeft <= 0) {
-        clearInterval(minusTime);
-    }
-    document.getElementById("counter-btn").value = 10 - timeLeft;
-    timeLeft -= 1;
+let timeleft = 10;
+let downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("counter-btn").innerHTML = "Time's up!";
+  } else {
+    document.getElementById("counter-btn").innerHTML = timeleft + " s";
+  }
+  timeleft -= 1;
 }, 1000);
 
 // Resets the question screen to prepare it for new question
