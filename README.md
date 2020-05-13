@@ -137,10 +137,9 @@ Trivia games have a simple nature so this project was focused on basic things wo
 
 ### Bugs during development
 
-How this works:
+How it works:
 
 * This is a description of the bug
-
     * how I found it
     * what went wrong
     * resolution
@@ -156,6 +155,11 @@ List of bugs found:
     * when I opened Gitpod, nothing I was working last session didn't load
     * an issue with Gitpod
     * pulled the latest changes from Github
+
+* After wining the game, select another category button didn't work
+    * when checking the code with dev tools
+    * question counter div was covering the button
+    * increased the z-index of the button
     
 ...
 

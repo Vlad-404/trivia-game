@@ -10,10 +10,11 @@ $("#chose-category").click(function() {
 $(".category-btn").click(function() {
   
   $("#categories").addClass("hide");
+  $("body").removeClass("index-image").addClass("background-blurry");
   $("#question-wrapper").removeClass("hide");
   $("#link-victory").removeClass("hide");
-  $("body").removeClass("index-image").addClass("background-blurry");
   $(".answers-counter").removeClass("hide");
+  $("#counter-btn").removeClass("hide");
   
 });
 
@@ -28,16 +29,16 @@ $("#again").click(function() {
   
   $("#victory").addClass("hide");
   $("#link-victory").addClass("hide");
+  $(".answers-counter").addClass("hide");
   $("#categories").removeClass("hide");
   $("body").removeClass("background-blurry").addClass("index-image");
-  $(".answers-counter").removeClass("hide");
 });
 
 $("#link-victory").click(function() {
   
   $("#link-victory").addClass("hide");
+  $("#counter-btn").addClass("hide");
   $("#question-wrapper").addClass("hide");
-  $(".answers-counter").addClass("hide");
   $("#victory").removeClass("hide");
   $("body").removeClass("background-blurry").addClass("index-image");
 });
@@ -55,6 +56,23 @@ const questions = [
         ]
     },
     {
+		category: "Politics",
+		type: "multiple",
+		difficulty: "medium",
+		question: "Who was the British Prime Minister at the outbreak of the Second World War?",
+		correct_answer: "Neville Chamberlain",
+		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"],
+    },
+    {
+        category: "Entertainment: Video Games",
+        type: "multiple",
+        difficulty: "easy",
+        question: "Which of the following is not a character in the Street Fighter series?",
+        correct_answer: "Mai Shiranui",
+        incorrect_answers: ["Laura Matsuda", "Sakura Kasugano", "Ibuki"
+            ]
+    },
+    {
         question: "Why did the chicken cross the road?",
         answers: [
             {text: "To run away!", correct: false },
@@ -65,8 +83,23 @@ const questions = [
     }
 ] 
 
-// TRANSLATOR for API
 /*
+function apiTranslator(data) {
+  let answer = {
+    text: "",
+    correct: true,
+  };
+  answers.text = data.correct_answer;
+  question.push(answer);
+  data.incorrect_answers.forEach((val) => {
+    answer.text = val;
+    answer.correct = false;
+  });
+  question.push(answer);
+}
+
+
+// TRANSLATOR for API
 
 const question = [
   {
@@ -92,7 +125,7 @@ const results = [
 		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"],
 	},
 ];
-function createAnswers(data) {
+function apiTranslator(data) {
   let answer = {
     text: "",
     correct: true,
@@ -146,6 +179,16 @@ function showQuestion(question) {
         answerButtonsElement.appendChild(button)
     })
 }
+
+// Countdown timer
+let timeLeft = 10;
+let minusTime = setInterval(function() {
+    if(timeLeft <= 0) {
+        clearInterval(minusTime);
+    }
+    document.getElementById("counter-btn").value = 10 - timeLeft;
+    timeLeft -= 1;
+}, 1000);
 
 // Resets the question screen to prepare it for new question
 function resetState() {

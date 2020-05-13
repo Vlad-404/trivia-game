@@ -126,6 +126,10 @@ body.wrong {
     align-items: center;
 }
 
+#again {
+    z-index: 100;
+}
+
 .hide {
     display: none;
 }
@@ -174,19 +178,6 @@ body.wrong {
         margin-top: 10px;
     }
 }
-
-@media only screen and (max-width: 540px) {
-
-    .btn-grid {
-        display: block;
-    }
-
-    .btn-scaled {
-        width: 100%;
-        margin-top: 10px;
-    }
-}
-
 
 /* temporary navigation */
 
