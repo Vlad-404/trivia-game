@@ -135,6 +135,28 @@ Trivia games have a simple nature so this project was focused on basic things wo
 
 # Testing
 
+### Bugs during development
+
+How this works:
+
+* This is a description of the bug
+
+    * how I found it
+    * what went wrong
+    * resolution
+
+List of bugs found:
+
+* Certain parts of code didn't work
+    * found out when code didn't execute
+    * found out that multiple elements had the same ID
+    * changed the ID's of the elements affected
+
+* Gitpod didn't load latest commits after I came back to it a day after
+    * when I opened Gitpod, nothing I was working last session didn't load
+    * an issue with Gitpod
+    * pulled the latest changes from Github
+    
 ...
 
 ## User stories Testing
