@@ -18,16 +18,6 @@ $(".category-btn").click(function() {
   $("#counter-btn").removeClass("hide");
   
 });
-/*
-// For wrong answer
-$("#counter-btn").click(function() {
-  
-  $("#link-victory").addClass("hide");
-  $(".answers-counter").addClass("hide");
-  $("#question-wrapper").addClass("hide");
-  $("#categories").removeClass("hide");
-  $("body").removeClass("background-blurry").addClass("index-image");
-});  */
 
 $("#restart-btn").click(function() {
   
@@ -81,7 +71,7 @@ const questions = [
 		/*correct_answer: "Neville Chamberlain",
 		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"], */
     },
-    {
+    /*{
         category: "Entertainment: Video Games",
         type: "multiple",
         difficulty: "easy",
@@ -89,7 +79,7 @@ const questions = [
         correct_answer: "Mai Shiranui",
         incorrect_answers: ["Laura Matsuda", "Sakura Kasugano", "Ibuki"
             ]
-    },
+    },*/
     {
         question: "Why did the chicken cross the road?",
         answers: [
@@ -167,6 +157,8 @@ const nextButton = document.getElementById('next-btn')
 
 const answerButtonsElement = document.getElementById("answers")
 
+const controllButtons = document.getElementById("controlls")
+
 let shuffledQuestions, currentQuestionIndex  // shuffles the questions and sets the index on the current question
 
 // FUNCTIONS
@@ -200,8 +192,11 @@ function showQuestion(question) {
 }
 
 // Countdown timer
+setTimer()
+function setTimer() {
 let timeleft = 5;
 let countdownTimer = setInterval(function(){
+  
   if(timeleft <= 0){
     clearInterval(countdownTimer);
     document.getElementById("counter-btn").innerHTML = "Time's up!";
@@ -211,8 +206,31 @@ let countdownTimer = setInterval(function(){
   }
   timeleft -= 1;
 }, 1000);
+}
+/*
+set timer with creating and deleting a button
+function setTimer() {
+    let createTimer = document.createElement("button")
+    
+    createTimer.innerHTML = setInterval(function(){
+        let timeleft = 5;
+        if(timeleft <= 0){
+        clearInterval(countdownTimer);
+        document.getElementById("counter-btn").innerHTML = "Time's up!";
+        wrongAnswer()
+        } else {
+        document.getElementById("counter-btn").innerHTML = timeleft + " s";
+            }
+        timeleft -= 1;
+    }, 1000);
 
-// wrong answer
+    let controllArea = document.getElementById("controlls")
+    controllArea.appendChild(createTimer)
+    createTimer.classList.add("btn", "btn-scaled")
+
+}*/
+
+// Go back to category selection after failed answer or timed out
 function wrongAnswer() {
     const timer = document.getElementById("counter-btn")
 
@@ -224,24 +242,10 @@ function questionsToCategories() {
     const categoriesCard = document.getElementById("categories")
     questionWrapper.classList.add("hide")
     categoriesCard.classList.remove("hide")
+    document.body.classList.remove("background-blurry")
+    document.body.classList.add("index-image")
+    setTimer()
 }
-/*
-let timeleft = 5;
-let countdownTimer = setInterval(function(){
-  if(timeleft <= 0){
-    clearInterval(countdownTimer);
-    document.getElementById("counter-btn").innerHTML = "Time's up!";
-    } else {
-    document.getElementById("counter-btn").innerHTML = timeleft + " s";
-  }
-  timeleft -= 1;
-}, 1000); */
-
-// Go back to category selection after failed answer or timed out
-
-/*function resetWrong() {
-    
-} */
 
 // Resets the question screen to prepare it for new question
 function resetState() {

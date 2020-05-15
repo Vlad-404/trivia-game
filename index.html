@@ -38,10 +38,10 @@
                 <div class="question-title">Please select a category:</div>
                     
                 <div class="btn-grid top-spacing">
-                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category1</button>
-                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category2</button>
-                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category3</button>
-                    <button class="btn no-style category-btn btn-scaled" onclick="startGame()">Category4</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame(); setTimer()">Category1</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame(); setTimer()">Category2</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame(); setTimer()">Category3</button>
+                    <button class="btn no-style category-btn btn-scaled" onclick="startGame(); setTimer()">Category4</button>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="controlls">
+            <div id="controlls" class="controlls">
                 <button id="next-btn" class="question-btn btn hide">Next</button>
                 <button id="restart-btn" class="question-btn btn hide">Restart</button>
                 <button id="counter-btn" class="question-btn btn"></button>

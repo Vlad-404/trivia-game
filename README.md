@@ -164,7 +164,11 @@ List of bugs found:
     * found it by loading the page next day
     * missing / (slash) on closing button ```(</button>)``` element in HTML
     * added / (slash) to a closing restart button
-...
+* Countdown timer didn't work
+    * after loading the questions page, there was no countdown 
+    * Uncaught ReferenceError: timeleft is not defined - in script.js
+    * Looking for a solution
+    ...
 
 ## User stories Testing
 
