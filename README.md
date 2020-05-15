@@ -160,7 +160,10 @@ List of bugs found:
     * when checking the code with dev tools
     * question counter div was covering the button
     * increased the z-index of the button
-    
+* a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
+    * found it by loading the page next day
+    * missing / (slash) on closing button ```(</button>)``` element in HTML
+    * added / (slash) to a closing restart button
 ...
 
 ## User stories Testing

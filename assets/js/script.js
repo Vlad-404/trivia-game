@@ -11,16 +11,28 @@ $(".category-btn").click(function() {
   
   $("#categories").addClass("hide");
   $("body").removeClass("index-image").addClass("background-blurry");
+  //$("#counter-btn").addClass("wrong");
   $("#question-wrapper").removeClass("hide");
   $("#link-victory").removeClass("hide");
   $(".answers-counter").removeClass("hide");
   $("#counter-btn").removeClass("hide");
   
 });
+/*
+// For wrong answer
+$("#counter-btn").click(function() {
+  
+  $("#link-victory").addClass("hide");
+  $(".answers-counter").addClass("hide");
+  $("#question-wrapper").addClass("hide");
+  $("#categories").removeClass("hide");
+  $("body").removeClass("background-blurry").addClass("index-image");
+});  */
 
 $("#restart-btn").click(function() {
   
-  $("#questions").addClass("hide");
+  $("#link-victory").addClass("hide");
+  $("#question-wrapper").addClass("hide");
   $("#categories").removeClass("hide");
   
 });
@@ -59,9 +71,15 @@ const questions = [
 		category: "Politics",
 		type: "multiple",
 		difficulty: "medium",
-		question: "Who was the British Prime Minister at the outbreak of the Second World War?",
-		correct_answer: "Neville Chamberlain",
-		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"],
+        question: "Who was the British Prime Minister at the outbreak of the Second World War?",
+        answers: [
+            {text: "Clemet Attlee", correct: false },
+            {text: "Winston Churchil", correct: false },
+            {text: "Neville Chamberlain", correct: true },
+            {text: "Stanley Baldwin", correct: false },
+        ]
+		/*correct_answer: "Neville Chamberlain",
+		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"], */
     },
     {
         category: "Entertainment: Video Games",
@@ -181,16 +199,23 @@ function showQuestion(question) {
 }
 
 // Countdown timer
-let timeleft = 10;
-let downloadTimer = setInterval(function(){
+let timeleft = 5;
+let countdownTimer = setInterval(function(){
   if(timeleft <= 0){
-    clearInterval(downloadTimer);
+    clearInterval(countdownTimer);
     document.getElementById("counter-btn").innerHTML = "Time's up!";
+    //document.getElementById("counter-btn").classList.add("wrong");
   } else {
     document.getElementById("counter-btn").innerHTML = timeleft + " s";
   }
   timeleft -= 1;
 }, 1000);
+
+// Go back to category selection after failed answer or timed out
+
+/*function resetWrong() {
+    
+} */
 
 // Resets the question screen to prepare it for new question
 function resetState() {
