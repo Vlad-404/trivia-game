@@ -159,6 +159,7 @@ function apiTranslator(data) {
 createAnswers(results);
 
 */
+const questionWrapper = document.getElementById("question-wrapper")
 
 const questionElement = document.getElementById("question")
 
@@ -204,12 +205,37 @@ let countdownTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(countdownTimer);
     document.getElementById("counter-btn").innerHTML = "Time's up!";
-    //document.getElementById("counter-btn").classList.add("wrong");
+    wrongAnswer()
   } else {
     document.getElementById("counter-btn").innerHTML = timeleft + " s";
   }
   timeleft -= 1;
 }, 1000);
+
+// wrong answer
+function wrongAnswer() {
+    const timer = document.getElementById("counter-btn")
+
+    timer.classList.add("wrong")
+    timer.addEventListener("click", questionsToCategories)
+}
+
+function questionsToCategories() {
+    const categoriesCard = document.getElementById("categories")
+    questionWrapper.classList.add("hide")
+    categoriesCard.classList.remove("hide")
+}
+/*
+let timeleft = 5;
+let countdownTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(countdownTimer);
+    document.getElementById("counter-btn").innerHTML = "Time's up!";
+    } else {
+    document.getElementById("counter-btn").innerHTML = timeleft + " s";
+  }
+  timeleft -= 1;
+}, 1000); */
 
 // Go back to category selection after failed answer or timed out
 
