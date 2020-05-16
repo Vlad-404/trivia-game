@@ -15,15 +15,7 @@ $(".category-btn").click(function() {
   $("#link-victory").removeClass("hide");
   $(".answers-counter").removeClass("hide");
   $("#counter-btn").removeClass("hide");
-  startGame();
-  setTimer();
-});
-
-$("#restart-btn").click(function() {
-  
-  $("#link-victory").addClass("hide");
-  $("#question-wrapper").addClass("hide");
-  $("#categories").removeClass("hide");
+  clearInterval(setTimer);
   startGame();
   setTimer();
 });
@@ -64,7 +56,7 @@ const controllButtons = document.getElementById("controlls")
 
 const categoryButtons = document.getElementsByClassName("category-btn")
 
-let shuffledQuestions, currentQuestionIndex  // shuffles the questions and sets the index on the current question
+let shuffledQuestions, currentQuestionIndex
 
 // FUNCTIONS
 
@@ -79,6 +71,7 @@ function startGame() {
 function setNextQuestion() {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
+    setTimer()
 }
 
 // Picks the next question and presents the answers
@@ -98,6 +91,18 @@ function showQuestion(question) {
     })
 }
 
+// For correct answer
+function nextQuestion() {
+    nextButton.classList.remove("hide")
+    timerButton.classList.add("hide")
+}
+
+nextButton.addEventListener("click", () => {
+    currentQuestionIndex++
+    setNextQuestion()
+    timerButton.classList.remove("hide")
+})
+
 // Countdown timer
 function setTimer() {
     let timeleft = 5;
@@ -108,33 +113,37 @@ function setTimer() {
             timerButton.innerHTML = "Time's Up!"
             timerButton.classList.add("wrong")
             timerButton.addEventListener("click", questionsToCategories)
+        } else if (selectAnswer == false) {
+            clearInterval(countdownTimer);
+            wrongAnswer()
         } else {
             document.getElementById("counter-btn").innerHTML = timeleft + " s";
         }
         timeleft -= 1;
     }, 1000);
+    //clearInterval(countdownTimer);
 }
 
 // Go back to category selection after failed answer or timed out
-function wrongAnswer () {
+function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
 }
 
+// Returns the player to category selection
 function questionsToCategories() {
     const categoriesCard = document.getElementById("categories")
+    let linkVictory = document.getElementById("link-victory")
     questionWrapper.classList.add("hide")
     categoriesCard.classList.remove("hide")
+    restartButton.className = "question-btn btn wrong hide";
     document.body.classList.remove("background-blurry")
     document.body.classList.add("index-image")
+    timerButton.innerHTML = "6 s"
     clearStatusClass(timerButton)
+    linkVictory.className = "hide";
 }
-
-nextButton.addEventListener("click", () => {
-    currentQuestionIndex++
-    setNextQuestion
-})
 
 // Resets the question screen to prepare it for new question
 function resetState() {
@@ -145,7 +154,8 @@ function resetState() {
     }
 }
 
-// Checks if the answer is correct or not and adds apropriate class
+// Checks if the answer is correct or not, adds apropriate class and displays apropriate button
+/*
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
@@ -159,17 +169,34 @@ function selectAnswer(e) {
         restartButton.classList.remove("hide")
         timerButton.classList.add("hide")
     }
-}
-
+} 
+ */
+function selectAnswer(e) {
+    const selectedButton = e.target
+    clearStatusClass(selectedButton)
+    if (selectedButton.dataset.correct) {
+        selectedButton.classList.add("correct")
+        nextQuestion()
+    } else {
+        selectedButton.classList.add("wrong")
+        wrongAnswer()
+    }
+    
+    //const correct = selectedButton.dataset.correct 
+    //const wrong = selectedButton.dataset.wrong
+    //setStatusClass(selectedButton)
+} 
+/*
 function setStatusClass(element, correct) {
-    clearStatusClass(element)
+    //clearStatusClass(element)
     if (correct) {
         element.classList.add("correct")
     } else {
         element.classList.add("wrong")
+        wrongAnswer()
     }
 }
-
+*/
 function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
@@ -201,15 +228,21 @@ const questions = [
 		/*correct_answer: "Neville Chamberlain",
 		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"], */
     },
-    /*{
+    {
         category: "Entertainment: Video Games",
         type: "multiple",
         difficulty: "easy",
         question: "Which of the following is not a character in the Street Fighter series?",
+        answers: [
+            {text: "Laura Matsuda", correct: false },
+            {text: "Ibuki", correct: false },
+            {text: "Mai Shiranui", correct: true },
+            {text: "Sakura Kasugano", correct: false }
+        ]  /*
         correct_answer: "Mai Shiranui",
         incorrect_answers: ["Laura Matsuda", "Sakura Kasugano", "Ibuki"
-            ]
-    },*/
+            ]  */
+    },
     {
         question: "Why did the chicken cross the road?",
         answers: [

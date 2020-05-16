@@ -167,8 +167,14 @@ List of bugs found:
 * Countdown timer didn't work
     * after loading the questions page, there was no countdown 
     * Uncaught ReferenceError: timeleft is not defined - in script.js
-    * Looking for a solution
-    ...
+    * corrected timeLeft variable to timeleft
+* Countdown timer didn't reset after clicking anything but "Time's Up!" button
+    * after clicking on "Incorrect!" and "Correct!" buttons
+    * countdown didn't reset and often I could see 2 countdowns competing
+    * looking for a solution
+
+...
+
 
 ## User stories Testing
 
