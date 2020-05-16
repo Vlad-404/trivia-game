@@ -11,12 +11,12 @@ $(".category-btn").click(function() {
   
   $("#categories").addClass("hide");
   $("body").removeClass("index-image").addClass("background-blurry");
-  //$("#counter-btn").addClass("wrong");
   $("#question-wrapper").removeClass("hide");
   $("#link-victory").removeClass("hide");
   $(".answers-counter").removeClass("hide");
   $("#counter-btn").removeClass("hide");
-  
+  startGame();
+  setTimer();
 });
 
 $("#restart-btn").click(function() {
@@ -24,7 +24,8 @@ $("#restart-btn").click(function() {
   $("#link-victory").addClass("hide");
   $("#question-wrapper").addClass("hide");
   $("#categories").removeClass("hide");
-  
+  startGame();
+  setTimer();
 });
 
 $("#again").click(function() {
@@ -153,13 +154,22 @@ const questionWrapper = document.getElementById("question-wrapper")
 
 const questionElement = document.getElementById("question")
 
+const restartButton = document.getElementById("restart-btn")
+
 const nextButton = document.getElementById('next-btn')
+
+const timerButton = document.getElementById("counter-btn")
 
 const answerButtonsElement = document.getElementById("answers")
 
 const controllButtons = document.getElementById("controlls")
 
+const categoryButtons = document.getElementsByClassName("category-btn")
+
 let shuffledQuestions, currentQuestionIndex  // shuffles the questions and sets the index on the current question
+
+//restartButton.addEventListener("click", startGame, setTimer)
+//categoryButtons.addEventListener("click", startGame, setTimer)
 
 // FUNCTIONS
 
@@ -185,6 +195,8 @@ function showQuestion(question) {
         button.classList.add("btn","btn-scaled")
         if (answer.correct) {
             button.dataset.correct = answer.correct
+        } else if (answer.false) {
+            incorrectAnswer()
         }
         button.addEventListener("click", selectAnswer)
         answerButtonsElement.appendChild(button)
@@ -192,20 +204,20 @@ function showQuestion(question) {
 }
 
 // Countdown timer
-setTimer()
 function setTimer() {
-let timeleft = 5;
-let countdownTimer = setInterval(function(){
+    let timeleft = 5;
+    let countdownTimer = setInterval(function() {
   
-  if(timeleft <= 0){
-    clearInterval(countdownTimer);
-    document.getElementById("counter-btn").innerHTML = "Time's up!";
-    wrongAnswer()
-  } else {
-    document.getElementById("counter-btn").innerHTML = timeleft + " s";
-  }
-  timeleft -= 1;
-}, 1000);
+        if(timeleft <= 0) {
+            clearInterval(countdownTimer);
+            timerButton.innerHTML = "Time's Up!"
+            timerButton.classList.add("wrong")
+            timerButton.addEventListener("click", questionsToCategories)
+        } else {
+            document.getElementById("counter-btn").innerHTML = timeleft + " s";
+        }
+        timeleft -= 1;
+    }, 1000);
 }
 /*
 set timer with creating and deleting a button
@@ -231,11 +243,10 @@ function setTimer() {
 }*/
 
 // Go back to category selection after failed answer or timed out
-function wrongAnswer() {
-    const timer = document.getElementById("counter-btn")
-
-    timer.classList.add("wrong")
-    timer.addEventListener("click", questionsToCategories)
+function incorrectAnswer () {
+    timerButton.classList.add("hide")
+    restartButton.classList.remove("hide")
+    restartButton.addEventListener("click", questionsToCategories)
 }
 
 function questionsToCategories() {
@@ -244,11 +255,17 @@ function questionsToCategories() {
     categoriesCard.classList.remove("hide")
     document.body.classList.remove("background-blurry")
     document.body.classList.add("index-image")
-    setTimer()
+    clearStatusClass(timerButton)
 }
+
+nextButton.addEventListener("click", () => {
+    currentQuestionIndex++
+    setNextQuestion
+})
 
 // Resets the question screen to prepare it for new question
 function resetState() {
+    clearStatusClass(document.body)
     nextButton.classList.add("hide")
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
@@ -263,6 +280,12 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove("hide")
+    } else {
+        restartButton.classList.remove("hide")
+        timerButton.classList.add("hide")
+    }
 }
 
 function setStatusClass(element, correct) {
