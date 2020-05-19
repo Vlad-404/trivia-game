@@ -17,7 +17,7 @@ $(".category-btn").click(function() {
   $("#counter-btn").removeClass("hide");
   clearInterval(setTimer);
   startGame();
-  setTimer();
+  //resetTimer();
 });
 
 $("#again").click(function() {
@@ -80,7 +80,7 @@ function showQuestion(question) {
     question.answers.forEach(answer => {
         const button = document.createElement("button")
         button.innerText = answer.text
-        button.classList.add("btn","btn-scaled")
+        button.classList.add("btn","btn-scaled", "answer")
         if (answer.correct) {
             button.dataset.correct = answer.correct
         } else if (answer.false) {
@@ -106,22 +106,18 @@ nextButton.addEventListener("click", () => {
 // Countdown timer
 function setTimer() {
     let timeleft = 5;
-    let countdownTimer = setInterval(function() {
+    let countdownTimer = setInterval(function(){
   
-        if(timeleft <= 0) {
-            clearInterval(countdownTimer);
-            timerButton.innerHTML = "Time's Up!"
-            timerButton.classList.add("wrong")
-            timerButton.addEventListener("click", questionsToCategories)
-        } else if (selectAnswer == false) {
-            clearInterval(countdownTimer);
-            wrongAnswer()
-        } else {
-            document.getElementById("counter-btn").innerHTML = timeleft + " s";
-        }
-        timeleft -= 1;
+    if(timeleft <= 0){
+        clearInterval(countdownTimer);
+        document.getElementById("counter-btn").innerHTML = "Time's up!";
+        timerButton.classList.add("wrong")
+        timerButton.addEventListener("click", questionsToCategories)
+    } else {
+        document.getElementById("counter-btn").innerHTML = timeleft + " s";
+    }
+    timeleft -= 1;
     }, 1000);
-    //clearInterval(countdownTimer);
 }
 
 // Go back to category selection after failed answer or timed out
@@ -129,6 +125,8 @@ function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
+    //resetTimer()
+    //clearInterval(countdownTimer);
 }
 
 // Returns the player to category selection
@@ -176,27 +174,24 @@ function selectAnswer(e) {
     clearStatusClass(selectedButton)
     if (selectedButton.dataset.correct) {
         selectedButton.classList.add("correct")
+        disableOtherAnswers()
         nextQuestion()
     } else {
         selectedButton.classList.add("wrong")
         wrongAnswer()
+        disableOtherAnswers()
     }
     
     //const correct = selectedButton.dataset.correct 
     //const wrong = selectedButton.dataset.wrong
     //setStatusClass(selectedButton)
 } 
-/*
-function setStatusClass(element, correct) {
-    //clearStatusClass(element)
-    if (correct) {
-        element.classList.add("correct")
-    } else {
-        element.classList.add("wrong")
-        wrongAnswer()
-    }
+
+// After clicking an answer, disable other ones
+function disableOtherAnswers() {
+    $(".answer").not(this).prop("disabled", true);
 }
-*/
+
 function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
