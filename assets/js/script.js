@@ -1,10 +1,29 @@
-// Show/hide elements
+// VARIABLES
 
-$("#chose-category").click(function() {
+const questionWrapper = document.getElementById("question-wrapper")
+
+const questionElement = document.getElementById("question")
+
+const restartButton = document.getElementById("restart-btn")
+
+const nextButton = document.getElementById('next-btn')
+
+const timerButton = document.getElementById("timer-btn")
+
+const answerButtonsElement = document.getElementById("answers")
+
+const controllButtons = document.getElementById("controlls")
+
+const categoryButtons = document.getElementsByClassName("category-btn")
+
+const answerButtons = document.getElementsByClassName("answer")
+
+// NAVIGATION
+
+$("#category-selection").click(function() {
   
   $("#welcome").addClass("hide");
   $("#categories").removeClass("hide");
-  
 });
 
 $(".category-btn").click(function() {
@@ -14,10 +33,17 @@ $(".category-btn").click(function() {
   $("#question-wrapper").removeClass("hide");
   $("#link-victory").removeClass("hide");
   $(".answers-counter").removeClass("hide");
-  $("#counter-btn").removeClass("hide");
-  clearInterval(setTimer);
-  startGame();
-  //resetTimer();
+  $("#timer-btn").removeClass("hide");
+  //clearInterval(setTimer); ?
+  showQuestion();
+});
+
+$("next-btn").click(function() {
+    $("next-btn").toggleClass("hide");
+    $("timer-btn").toggleClass("hide");
+    //clearStatusClass(document.body);
+    setTimer();
+    //fetchQuestionsGeneral();
 });
 
 $("#again").click(function() {
@@ -32,54 +58,109 @@ $("#again").click(function() {
 $("#link-victory").click(function() {
   
   $("#link-victory").addClass("hide");
-  $("#counter-btn").addClass("hide");
+  $("#timer-btn").addClass("hide");
   $("#question-wrapper").addClass("hide");
   $("#victory").removeClass("hide");
   $("body").removeClass("background-blurry").addClass("index-image");
 });
 
-// VARIABLES
 
-const questionWrapper = document.getElementById("question-wrapper")
 
-const questionElement = document.getElementById("question")
+// API 
+ 
+// Gets the questions
+function fetchQuestionsGeneral() {
+    fetch("https://opentdb.com/api.php?amount=1&type=multiple")
+        .then(results => {
+            if (results.ok) {
+                console.log("Questions retrieved!")
+            } else {
+                console.log("Problem with getting the questions")
+            }
+            return results.json()
+        })
+        .then(data => {
+            console.log(data)
+            formattedQuestion = data.results[0].question
+            //questionElement.innerText = formattedQuestion
+            
+            
+            const formattedAnswers = []
+            correctAnswer = data.results[0].correct_answer
+            incorrectAnswers = data.results[0].incorrect_answers
+               incorrectAnswers.forEach(answer => {
+                   formattedAnswers.push(answer)
+               });
+            
+            formattedAnswers.push(correctAnswer)
+            console.log("Formatted", formattedAnswers)
+            /*
+            answerButtons.innerText.forEach(answer => {
+                const button = document.createElement("button")
+                button.innerText = shuffledAnswers
+                button.classList.add("btn","btn-scaled", "answer")
+                if (answer.correctAnswer) {
+                    button.dataset.correct = answer.correct
+                } else {
+                    wrongAnswer()
+                }
+                button.addEventListener("click", selectAnswer)
+            }) }
+            
+            function shuffledAnswers(formattedAnswers) {
+                let currentIndex = formattedAnswers.length, temporaryValue, randomIndex;
 
-const restartButton = document.getElementById("restart-btn")
+                while (0 !== currentIndex) {
+                    randomIndex = Math.Floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
 
-const nextButton = document.getElementById('next-btn')
+                    temporaryValue = formattedAnswers[currentIndex];
+                    formattedAnswers[currentIndex] = formattedAnswers[randomIndex];
+                    formattedAnswers[randomIndex] = temporaryValue;
+                }
+                return formattedAnswers;
+            }*/
+            
+            
+            console.log(incorrectAnswers)
+            //console.log(formattedAnswers)
 
-const timerButton = document.getElementById("counter-btn")
+            console.log(formattedQuestion)
+            return formattedQuestion
+        })
+        
+        /*.then(loadedQuestions => {
+            console.log(loadedQuestions.results);
+            questions = loadedQuestions.results.map(loadedQuestion => {
+            const formattedQuestion = {
+                question: loadedQuestion.question
+            };
 
-const answerButtonsElement = document.getElementById("answers")
+            const answerChoices = [...loadedQuestion.incorrect_answers];
 
-const controllButtons = document.getElementById("controlls")
+            answerChoices.forEach((choice, index) => {
+                formattedQuestion["choice" + (index + 1)] = choice;
+            });
 
-const categoryButtons = document.getElementsByClassName("category-btn")
+            console.log(formattedQuestion);
+            return formattedQuestion;
+            });
+        })*/
+        .catch(err => {
+            console.error(err);
+        });
+}
 
-let shuffledQuestions, currentQuestionIndex
+//questionElement.innerText = formattedQuestion
 
 // FUNCTIONS
 
-// Starts the game with random question and initiates setNextQuestion function
-function startGame() {
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
-    setNextQuestion()
-}
-
-// Sets the next question randomly
-function setNextQuestion() {
-    resetState()
-    showQuestion(shuffledQuestions[currentQuestionIndex])
-    setTimer()
-}
-
 // Picks the next question and presents the answers
-function showQuestion(question) {
-    questionElement.innerText = question.question
-    question.answers.forEach(answer => {
+function showQuestion() {
+    questionElement.innerHTML = formattedQuestion
+    /*question.answers.forEach(answer => {
         const button = document.createElement("button")
-        button.innerText = answer.text
+        button.innerText = answer.choice
         button.classList.add("btn","btn-scaled", "answer")
         if (answer.correct) {
             button.dataset.correct = answer.correct
@@ -88,20 +169,8 @@ function showQuestion(question) {
         }
         button.addEventListener("click", selectAnswer)
         answerButtonsElement.appendChild(button)
-    })
+    })*/
 }
-
-// For correct answer
-function nextQuestion() {
-    nextButton.classList.remove("hide")
-    timerButton.classList.add("hide")
-}
-
-nextButton.addEventListener("click", () => {
-    currentQuestionIndex++
-    setNextQuestion()
-    timerButton.classList.remove("hide")
-})
 
 // Countdown timer
 function setTimer() {
@@ -110,11 +179,11 @@ function setTimer() {
   
     if(timeleft <= 0){
         clearInterval(countdownTimer);
-        document.getElementById("counter-btn").innerHTML = "Time's up!";
+        document.getElementById("timer-btn").innerHTML = "Time's up!";
         timerButton.classList.add("wrong")
         timerButton.addEventListener("click", questionsToCategories)
     } else {
-        document.getElementById("counter-btn").innerHTML = timeleft + " s";
+        document.getElementById("timer-btn").innerHTML = timeleft + " s";
     }
     timeleft -= 1;
     }, 1000);
@@ -125,8 +194,6 @@ function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
-    //resetTimer()
-    //clearInterval(countdownTimer);
 }
 
 // Returns the player to category selection
@@ -139,36 +206,10 @@ function questionsToCategories() {
     document.body.classList.remove("background-blurry")
     document.body.classList.add("index-image")
     timerButton.innerHTML = "6 s"
-    clearStatusClass(timerButton)
     linkVictory.className = "hide";
 }
 
-// Resets the question screen to prepare it for new question
-function resetState() {
-    clearStatusClass(document.body)
-    nextButton.classList.add("hide")
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-    }
-}
-
 // Checks if the answer is correct or not, adds apropriate class and displays apropriate button
-/*
-function selectAnswer(e) {
-    const selectedButton = e.target
-    const correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
-    Array.from(answerButtonsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-    if (shuffledQuestions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove("hide")
-    } else {
-        restartButton.classList.remove("hide")
-        timerButton.classList.add("hide")
-    }
-} 
- */
 function selectAnswer(e) {
     const selectedButton = e.target
     clearStatusClass(selectedButton)
@@ -181,10 +222,6 @@ function selectAnswer(e) {
         wrongAnswer()
         disableOtherAnswers()
     }
-    
-    //const correct = selectedButton.dataset.correct 
-    //const wrong = selectedButton.dataset.wrong
-    //setStatusClass(selectedButton)
 } 
 
 // After clicking an answer, disable other ones
@@ -192,62 +229,26 @@ function disableOtherAnswers() {
     $(".answer").not(this).prop("disabled", true);
 }
 
+// Clears correct and wrong classes
 function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
 }
 
-// Questions
 
-const questions = [
-    {
-        question: "What is 1 + 1?",
-        answers: [
-            {text: "2", correct: true },
-            {text: "22", correct: false },
-            {text: "11", correct: false },
-            {text: "7", correct: false }
-        ]
-    },
-    {
-		category: "Politics",
-		type: "multiple",
-		difficulty: "medium",
-        question: "Who was the British Prime Minister at the outbreak of the Second World War?",
-        answers: [
-            {text: "Clemet Attlee", correct: false },
-            {text: "Winston Churchil", correct: false },
-            {text: "Neville Chamberlain", correct: true },
-            {text: "Stanley Baldwin", correct: false },
-        ]
-		/*correct_answer: "Neville Chamberlain",
-		incorrect_answers: ["Clement Attlee", "Winston Churchill", "Stanley Baldwin"], */
-    },
-    {
-        category: "Entertainment: Video Games",
-        type: "multiple",
-        difficulty: "easy",
-        question: "Which of the following is not a character in the Street Fighter series?",
-        answers: [
-            {text: "Laura Matsuda", correct: false },
-            {text: "Ibuki", correct: false },
-            {text: "Mai Shiranui", correct: true },
-            {text: "Sakura Kasugano", correct: false }
-        ]  /*
-        correct_answer: "Mai Shiranui",
-        incorrect_answers: ["Laura Matsuda", "Sakura Kasugano", "Ibuki"
-            ]  */
-    },
-    {
-        question: "Why did the chicken cross the road?",
-        answers: [
-            {text: "To run away!", correct: false },
-            {text: "To get to the other side", correct: true },
-            {text: "This again?", correct: false },
-            {text: "7", correct: false }
-        ]
-    }
-] 
+/*function apiTranslator(data) {
+  let answer = {
+    text: "",
+    correct: true,
+  };
+  answers.text = data.results.correct_answer;
+  question.push(answer);
+  data.incorrect_answers.forEach((val) => {
+    answer.text = val;
+    answer.correct = false;
+  });
+  question.push(answer);
+}*/
 
 /*
 function apiTranslator(data) {
@@ -262,11 +263,12 @@ function apiTranslator(data) {
     answer.correct = false;
   });
   question.push(answer);
-}
+} */
 
 
-// TRANSLATOR for API
+// Questions
 
+/*
 const question = [
   {
     question: "What is 1 + 1?",
