@@ -74,22 +74,20 @@ function fetchQuestionsGeneral() {
             return results.json()
         })
         .then(data => {
-            console.log("Data: ",data)
+            console.log("Data: ", data)
             formattedQuestion = data.results[0].question
-            questionElement.innerText = formattedQuestion
+            //questionElement.innerText = formattedQuestion
 
-            const formattedAnswers = []
             correctAnswer = data.results[0].correct_answer
+            console.log("Correct answer:", correctAnswer)
             incorrectAnswers = data.results[0].incorrect_answers
-               incorrectAnswers.forEach(answer => {
-                   formattedAnswers.push(answer)
-               });
             
-            formattedAnswers.push(correctAnswer)
-            console.log("Formatted question:", formattedQuestion)
-            console.log("Formatted answers:", formattedAnswers)
+            //console.log("Formatted question:", formattedQuestion)
+            //console.log("Formatted answers:", formattedAnswers)
             
-            return formattedQuestion
+            let questionsWithAnswers = [formattedQuestion, correctAnswer, incorrectAnswers];
+            //console.log("Questions with answers: ", questionsWithAnswers);
+            return questionsWithAnswers
         })/*
         .then(data => {
             const formattedAnswers = []
@@ -118,8 +116,9 @@ async function showQuestion() {
     $("#link-victory").removeClass("hide");
     $(".answers-counter").removeClass("hide");
     $("#timer-btn").removeClass("hide");
-    const formattedQuestion = await fetchQuestionsGeneral();
-    questionElement.innerHTML = formattedQuestion;
+    const questionsWithAnswers = await fetchQuestionsGeneral();
+    questionElement.innerHTML = questionsWithAnswers[0];
+    console.log("Show question with answers:", questionsWithAnswers);
 }
 
 // Countdown timer
