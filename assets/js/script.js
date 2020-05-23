@@ -73,15 +73,25 @@ function fetchQuestionsGeneral() {
             }
             return results.json()
         })
-        .then(results => {
-            return results
-        })
         .then(data => {
-            console.log(data)
+            console.log("Data: ",data)
             formattedQuestion = data.results[0].question
-            /*questionElement.innerText = formattedQuestion
+            questionElement.innerText = formattedQuestion
+
+            const formattedAnswers = []
+            correctAnswer = data.results[0].correct_answer
+            incorrectAnswers = data.results[0].incorrect_answers
+               incorrectAnswers.forEach(answer => {
+                   formattedAnswers.push(answer)
+               });
             
+            formattedAnswers.push(correctAnswer)
+            console.log("Formatted question:", formattedQuestion)
+            console.log("Formatted answers:", formattedAnswers)
             
+            return formattedQuestion
+        })/*
+        .then(data => {
             const formattedAnswers = []
             correctAnswer = data.results[0].correct_answer
             incorrectAnswers = data.results[0].incorrect_answers
@@ -92,15 +102,12 @@ function fetchQuestionsGeneral() {
             formattedAnswers.push(correctAnswer)
             console.log("Formatted", formattedAnswers)
             
-            console.log(incorrectAnswers)
-            //console.log(formattedAnswers)
-            */
-            console.log(formattedQuestion)
-            return formattedQuestion
-        })
+            console.log("Incorrect answers array", incorrectAnswers)
+            return formattedAnswers
+        })*/
         .catch(err => {
             console.error(err);
-        });
+        })
         
 }
 
