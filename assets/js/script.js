@@ -58,6 +58,7 @@ $("next-btn").click(function() {
     //clearInterval(countdownTimer)
     clearStatusClass(document.body);
     clearStatusClass(timerButton);
+    currentQuestionIndex++;
     setNextQuestion();
 });
 
@@ -104,11 +105,6 @@ function fetchQuestionsGeneral() {
             formattedIncorrectAnswers = data.results[0].incorrect_answers
             arrayOfIncorrectAnswers.push(formattedIncorrectAnswers)
 
-
-            
-            /*let questionsWithAnswers = [formattedQuestion, correctAnswer, incorrectAnswers];
-            
-            return questionsWithAnswers */
         })
         .catch(err => {
             console.error(err);
@@ -128,8 +124,19 @@ async function setFirstQuestion() {
     
     let allAnswers = [correctAnswer[0], ...arrayOfIncorrectAnswers[0]];
     let shuffledAnswers = allAnswers.sort(() => Math.random() - .5)
-    console.log("Array of all answers:", shuffledAnswers);
-    
+    console.log("Array of shuffled answers:", shuffledAnswers);
+
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+    }
+
+    shuffledAnswers.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer       
+        button.classList.add('btn')
+        answerButtonsElement.appendChild(button)
+    })
+
     setQuestionUI();
 }
 
