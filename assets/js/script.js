@@ -20,40 +20,57 @@ const answerButtons = document.getElementsByClassName("answer")
 
 const loadingScreen = document.getElementById("loading-screen")
 
-let linkVictory = document.getElementById("link-victory") // temporary navigation
+let linkVictory = document.getElementById("link-victory") // shuffledorary navigation
+
+let currentQuestionIndex
+
+
 
 // NAVIGATION
 
-$("#category-selection").click(function() {
+$("#start-button").click(function() {
   
   $("#welcome").addClass("hide");
   $("#categories").removeClass("hide");
 });
 
 $(".category-btn").click(function() {
+
   $("#categories").addClass("hide");
-  showQuestionContainer();
-  setUpQuestion();
+  $("#loading-screen").removeClass("hide");
+  setFirstQuestion()
 });
+
+function setQuestionUI() {
+    $("#loading-screen").addClass("hide");
+    $("body").removeClass("index-image").addClass("background-blurry");
+    $("#question-wrapper").removeClass("hide");
+    $("#link-victory").removeClass("hide");  // shuffledorary navigation
+    $("#question-counter").removeClass("hide");
+    $("#timer-btn").removeClass("hide");
+    currentQuestionIndex = 0;
+    setTimer();
+}
 
 $("next-btn").click(function() {
     $("next-btn").addClass("hide");
     $("timer-btn").removeClass("hide");
+    //clearInterval(countdownTimer)
     clearStatusClass(document.body);
     clearStatusClass(timerButton);
-    setUpQuestion();
+    setNextQuestion();
 });
 
 $("#again").click(function() {
   
   $("#victory").addClass("hide");
-  $("#link-victory").addClass("hide"); // temporary navigation
+  $("#link-victory").addClass("hide"); // shuffledorary navigation
   $(".answers-counter").addClass("hide");
   $("#categories").removeClass("hide");
   $("body").removeClass("background-blurry").addClass("index-image");
 });
 
-// temporary navigation
+// shuffledorary navigation
 $("#link-victory").click(function() {  
   
   $("#link-victory").addClass("hide");
@@ -65,7 +82,7 @@ $("#link-victory").click(function() {
 
 // FUNCTIONS
 
-// Function that fetches and makes data from API usable
+// Function that fetches data from API and makes it usable by the game
 function fetchQuestionsGeneral() {
     return fetch("https://opentdb.com/api.php?amount=1&type=multiple")
         .then(results => {
@@ -78,15 +95,20 @@ function fetchQuestionsGeneral() {
         })
         .then(data => {
             console.log("Data: ", data)
-            formattedQuestion = data.results[0].question
+            formattedQuestions = data.results[0].question
+            questionsArray.push(formattedQuestions)
 
-            correctAnswer = data.results[0].correct_answer
-            console.log("Correct answer:", correctAnswer)
-            incorrectAnswers = data.results[0].incorrect_answers
+            formattedCorrectAnswer = data.results[0].correct_answer
+            correctAnswer.push(formattedCorrectAnswer)
+
+            formattedIncorrectAnswers = data.results[0].incorrect_answers
+            arrayOfIncorrectAnswers.push(formattedIncorrectAnswers)
+
+
             
-            let questionsWithAnswers = [formattedQuestion, correctAnswer, incorrectAnswers];
-
-            return questionsWithAnswers
+            /*let questionsWithAnswers = [formattedQuestion, correctAnswer, incorrectAnswers];
+            
+            return questionsWithAnswers */
         })
         .catch(err => {
             console.error(err);
@@ -94,38 +116,40 @@ function fetchQuestionsGeneral() {
         
 }
 
-// Picks the next question and presents the answers
-function showQuestionContainer() {
-    $("body").removeClass("index-image").addClass("background-blurry");
-    $("#question-wrapper").removeClass("hide");
-    $("#link-victory").removeClass("hide");  // temporary navigation
-    $(".answers-counter").removeClass("hide");
-    $("#timer-btn").removeClass("hide");
+const questionsArray = []
+const correctAnswer = [] 
+const arrayOfIncorrectAnswers = []
+
+// Picks only the first question
+async function setFirstQuestion() {
+    let setFirstQuestion = await fetchQuestionsGeneral();
+    //clearInterval(countdownTimer);
+    questionElement.innerHTML = questionsArray[0];
+    
+    let allAnswers = [correctAnswer[0], ...arrayOfIncorrectAnswers[0]];
+    let shuffledAnswers = allAnswers.sort(() => Math.random() - .5)
+    console.log("Array of all answers:", shuffledAnswers);
+    
+    setQuestionUI();
 }
 
-async function setUpQuestion() {
-    questionElement.innerHTML = "Preparing question...";
-    const questionsWithAnswers = await fetchQuestionsGeneral();
-    questionElement.innerHTML = questionsWithAnswers[0];
-    setTimer();
-    //console.log("Show question with answers:", questionsWithAnswers);
-}
- 
 // Countdown timer
+let countdownTimer;
+
 function setTimer() {
+    timerButton.innerHTML = "6 s"
     let timeleft = 5;
     let countdownTimer = setInterval(function(){
-  
-    if(timeleft <= 0){
-        clearInterval(countdownTimer);
-        document.getElementById("timer-btn").innerHTML = "Time's up!";
-        timerButton.classList.add("wrong")
-        timerButton.addEventListener("click", function(){
-        clearStatusClass(timerButton);
-        questionsToCategories();
-        })
-    } else {
-        document.getElementById("timer-btn").innerHTML = timeleft + " s";
+        if(timeleft <= 0){
+            clearInterval(countdownTimer);
+            document.getElementById("timer-btn").innerHTML = "Time's up!";
+            timerButton.classList.add("wrong")
+            timerButton.addEventListener("click", function(){
+            clearStatusClass(timerButton);
+            questionsToCategories();
+            })
+        } else {
+            document.getElementById("timer-btn").innerHTML = timeleft + " s";
     }
     timeleft -= 1;
     }, 1000);

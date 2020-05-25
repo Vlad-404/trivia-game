@@ -172,6 +172,10 @@ List of bugs found:
     * after clicking on "Incorrect!" and "Correct!" buttons
     * countdown didn't reset and often I could see 2 countdowns competing
     * looking for a solution
+* Issues with awaiting for the data from api to be ready
+    * when expecting the question, nothing was shown
+    * sync issues: local code was executing faster than api could load the data
+    * implemented async function
 
 ...
 
@@ -214,6 +218,7 @@ When deploying Trivia Game using GitHub Pages the following steps were made:
 
 Content for this game was based on "Who wants to be a millionaire" and the content was used from following sources:
 * [Open Trivia DB](https://opentdb.com/) - pulled the questions through their API
+* [Flevix.com](https://flevix.com/bounce-bar-preloader-gif/) for supplying free loading gif image 
 
 ## Media 
 
