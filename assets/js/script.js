@@ -53,7 +53,7 @@ function setQuestionUI() {
     $("#link-victory").removeClass("hide");  // temporary navigation
     $("#question-counter").removeClass("hide");
     $("#timer-btn").removeClass("hide");
-    currentQuestionIndex = 0;
+    //currentQuestionIndex = 0;
     setTimer();
 }
 
@@ -62,6 +62,9 @@ $("#next-btn").click(function() {
     $("#timer-btn").removeClass("hide");
     currentQuestionIndex++;
     setFirstQuestion();                 // temporary
+    console.log("Current question index is ", currentQuestionIndex);
+    document.getElementById("counter").innerHTML = currentQuestionIndex;
+    return currentQuestionIndex;
     //setNextQuestion();
 });
 
@@ -121,8 +124,7 @@ function fetchQuestionsGeneral() {
 // Picks only the first question and presents the UI
 async function setFirstQuestion() {
     let setFirstQuestion = await fetchQuestionsGeneral();
-    //clearInterval(countdownTimer);
-    //currentQuestionIndex = 0
+    currentQuestionIndex = 0
     questionElement.innerHTML = questionsArray[0];
     
     let allAnswers = [correctAnswer[0], ...arrayOfIncorrectAnswers[0]];
@@ -141,8 +143,8 @@ async function setFirstQuestion() {
     })
 
     setQuestionUI();
-    addPoints();
     selectAnswer();
+    //return currentQuestionIndex;
 }
 
 function setNextQuestion() {
@@ -237,8 +239,4 @@ function disableOtherAnswers() {
 function clearStatusClass() {
     answerButtons.classList.remove("correct")
     answerButtons.classList.remove("wrong")
-}
-
-function addPoints() {
-    document.getElementById("counter").innerText = currentQuestionIndex++;
 }
