@@ -57,13 +57,11 @@ function setQuestionUI() {
     setTimer();
 }
 
-$("next-btn").click(function() {
-    $("next-btn").addClass("hide");
-    $("timer-btn").removeClass("hide");
-    //clearInterval(countdownTimer)
-    clearStatusClass(document.body);
-    clearStatusClass(timerButton);
+$("#next-btn").click(function() {
+    $("#next-btn").addClass("hide");
+    $("#timer-btn").removeClass("hide");
     currentQuestionIndex++;
+    setFirstQuestion();                 // temporary
     //setNextQuestion();
 });
 
@@ -107,7 +105,7 @@ function fetchQuestionsGeneral() {
 
             formattedCorrectAnswer = data.results[0].correct_answer
             correctAnswer.push(formattedCorrectAnswer)
-            console.log("Correct answers:", formattedCorrectAnswer)
+            console.log("Correct answer:", formattedCorrectAnswer)
 
             formattedIncorrectAnswers = data.results[0].incorrect_answers
             arrayOfIncorrectAnswers.push(formattedIncorrectAnswers)
@@ -120,11 +118,11 @@ function fetchQuestionsGeneral() {
         
 }
 
-// Picks only the first question and presents an UI
+// Picks only the first question and presents the UI
 async function setFirstQuestion() {
     let setFirstQuestion = await fetchQuestionsGeneral();
     //clearInterval(countdownTimer);
-    currentQuestionIndex = 0
+    //currentQuestionIndex = 0
     questionElement.innerHTML = questionsArray[0];
     
     let allAnswers = [correctAnswer[0], ...arrayOfIncorrectAnswers[0]];
@@ -166,6 +164,7 @@ function setNextQuestion() {
         button.classList.add('btn')
         answerButtonsElement.appendChild(button)
     })
+    setTimer();
 }
 
 // Countdown timer
@@ -182,20 +181,17 @@ function setTimer() {
             $(".answer").prop("disabled", true);
             timerButton.addEventListener("click", function(){
                 timerButton.classList.remove("wrong");
-            //clearStatusClass(timerButton);
                 questionsToCategories();
+                //clearTimeout(countdownTimer);
             })
-        } /*else if (timeleft = 0){
-            $(".answer").prop("disabled", true);
-            timerButton.addEventListener("click", function(){
-            clearStatusClass(timerButton);
-            questionsToCategories();
-            });
-        } */else {
+        } else {
             document.getElementById("timer-btn").innerHTML = timeleft + " s";
     }
-    timeleft -= 1;
+    timeleft--;
     }, 1000);
+    $(".answer").click(function() {
+        clearTimeout(countdownTimer);
+    });
 }
 
 // Go back to category selection after failed answer or timed out
@@ -213,7 +209,6 @@ function questionsToCategories() {
     restartButton.className = "question-btn btn wrong hide";
     document.body.classList.remove("background-blurry")
     document.body.classList.add("index-image")
-    //timerButton.innerHTML = "6 s"
     linkVictory.className = "hide";
 }
 
@@ -245,5 +240,5 @@ function clearStatusClass() {
 }
 
 function addPoints() {
-    document.getElementById("counter").innerText = currentQuestionIndex;
+    document.getElementById("counter").innerText = currentQuestionIndex++;
 }
