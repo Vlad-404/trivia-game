@@ -179,11 +179,19 @@ function setTimer() {
             clearInterval(countdownTimer);
             document.getElementById("timer-btn").innerHTML = "Time's up!";
             timerButton.classList.add("wrong")
+            $(".answer").prop("disabled", true);
+            timerButton.addEventListener("click", function(){
+                timerButton.classList.remove("wrong");
+            //clearStatusClass(timerButton);
+                questionsToCategories();
+            })
+        } /*else if (timeleft = 0){
+            $(".answer").prop("disabled", true);
             timerButton.addEventListener("click", function(){
             clearStatusClass(timerButton);
             questionsToCategories();
-            })
-        } else {
+            });
+        } */else {
             document.getElementById("timer-btn").innerHTML = timeleft + " s";
     }
     timeleft -= 1;
