@@ -53,7 +53,6 @@ function setQuestionUI() {
     $("#link-victory").removeClass("hide");  // temporary navigation
     $("#question-counter").removeClass("hide");
     $("#timer-btn").removeClass("hide");
-    //currentQuestionIndex = 0;
     setTimer();
 }
 
@@ -89,38 +88,6 @@ $("#link-victory").click(function() {
 
 // FUNCTIONS
 
-// Function that fetches data from API and stores it in apropriate variables for question, correct answer and array of incorrect answers
-function fetchQuestionsGeneral() {
-    return fetch("https://opentdb.com/api.php?amount=1&category=9&type=multiple")
-        .then(results => {
-            if (results.ok) {
-                console.log("Questions retrieved!")
-            } else {
-                console.log("Problem with getting the questions")
-            }
-            return results.json()
-        })
-        .then(data => {
-            console.log("Data: ", data)
-            formattedQuestions = data.results[0].question
-            questionsArray.push(formattedQuestions)
-            //console.log("Questions:", formattedQuestions)
-
-            formattedCorrectAnswer = data.results[0].correct_answer
-            correctAnswer.push(formattedCorrectAnswer)
-            console.log("Correct answer:", formattedCorrectAnswer)
-
-            formattedIncorrectAnswers = data.results[0].incorrect_answers
-            arrayOfIncorrectAnswers.push(formattedIncorrectAnswers)
-            //console.log("Array of incorrect answers:", formattedIncorrectAnswers)
-
-        })
-        .catch(err => {
-            console.error(err);
-        })
-        
-}
-
 // Picks only the first question and presents the UI
 async function setFirstQuestion() {
     let setFirstQuestion = await fetchQuestionsGeneral();
@@ -149,7 +116,6 @@ async function setFirstQuestion() {
 
 function setNextQuestion() {
 
-    currentQuestionIndex++
     questionElement.innerHTML = questionsArray[currentQuestionIndex];
     
     let allAnswers = [correctAnswer[currentQuestionIndex], ...arrayOfIncorrectAnswers[currentQuestionIndex]];
@@ -184,7 +150,6 @@ function setTimer() {
             timerButton.addEventListener("click", function(){
                 timerButton.classList.remove("wrong");
                 questionsToCategories();
-                //clearTimeout(countdownTimer);
             })
         } else {
             document.getElementById("timer-btn").innerHTML = timeleft + " s";
@@ -233,10 +198,4 @@ function selectAnswer() {
 // After clicking an answer, disable other ones
 function disableOtherAnswers() {
     $(".answer").not(this).prop("disabled", true);
-}
-
-// Clears correct and wrong classes from answers
-function clearStatusClass() {
-    answerButtons.classList.remove("correct")
-    answerButtons.classList.remove("wrong")
 }
