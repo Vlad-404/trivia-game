@@ -1,36 +1,59 @@
 // VARIABLES
 
-const questionsArray = []
+let currentQuestionIndex = 0;
 
-const correctAnswer = [] 
-
-const arrayOfIncorrectAnswers = []
-
-let currentQuestionIndex
-
-const questionWrapper = document.getElementById("question-wrapper")
-
-const questionElement = document.getElementById("question")
-
-const restartButton = document.getElementById("restart-btn")
-
-const nextButton = document.getElementById('next-btn')
-
-const timerButton = document.getElementById("timer-btn")
-
-const answerButtonsElement = document.getElementById("answers-div")
-
-const controllButtons = document.getElementById("controlls")
-
-const categoryButtons = document.getElementsByClassName("category-btn")
-
-const answerButtons = document.getElementsByClassName("answer")
-
-const loadingScreen = document.getElementById("loading-screen")
-
+//interactive elements
+const questionElement = document.getElementById("question");
+const restartButton = document.getElementById("restart-btn");
+const nextButton = document.getElementById('next-btn');
+const timerButton = document.getElementById("timer-btn");
+const categoryButtons = document.getElementsByClassName("category-btn");
+const answerButtons = Array.from(document.getElementsByClassName("answer"));
 let linkVictory = document.getElementById("link-victory") // temporary navigation
 
-// NAVIGATION
+//containers
+const questionWrapper = document.getElementById("question-wrapper");
+const loadingScreen = document.getElementById("loading-screen");
+const questionCounter = document.getElementById("question-counter");
+//const answerButtonsElement = document.getElementById("answers-div");
+
+//arrays
+let currentQuestion = {};
+let allQuestions = [];
+const correctAnswer = [];
+const arrayOfIncorrectAnswers = [];
+
+let questions = [       // temporary
+    {
+      question: "Inside which HTML element do we put the JavaScript??",
+      answer1: "<script>",
+      answer2: "<javascript>",
+      answer3: "<js>",
+      answer4: "<scripting>",
+      rightAnswer: 1
+    },
+    {
+      question:
+        "What is the correct syntax for referring to an external script called 'xxx.js'?",
+        answer1: "<script href='xxx.js'>",
+        answer2: "<script name='xxx.js'>",
+        answer3: "<script src='xxx.js'>",
+        answer4: "<script file='xxx.js'>",
+      rightAnswer: 3
+    },
+    {
+      question: " How do you write 'Hello World' in an alert box?",
+      answer1: "msgBox('Hello World');",
+      answer2: "alertBox('Hello World');",
+      answer3: "msg('Hello World');",
+      answer4: "alert('Hello World');",
+      rightAnswer: 4
+    }
+  ];
+
+let chooseAnswers = true;
+
+const MAX_QUESTIONS = 3;
 
 $("#start-button").click(function() {
   
@@ -42,7 +65,8 @@ $(".category-btn").click(function() {
 
   $("#categories").addClass("hide");
   $("#loading-screen").removeClass("hide");
-  $("#question-counter").removeClass("hide");
+  questionCounter.setAttribute("class", "");
+  setQuestionUI();
   setFirstQuestion()
 });
 
@@ -51,88 +75,35 @@ function setQuestionUI() {
     $("body").removeClass("index-image").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
     $("#link-victory").removeClass("hide");  // temporary navigation
-    $("#question-counter").removeClass("hide");
+    //$("#question-counter").removeClass("hide");
     $("#timer-btn").removeClass("hide");
-    setTimer();
+    //setTimer();
 }
 
-$("#next-btn").click(function() {
-    $("#next-btn").addClass("hide");
-    $("#timer-btn").removeClass("hide");
-    currentQuestionIndex++;
-    setFirstQuestion();                 // temporary
-    console.log("Current question index is ", currentQuestionIndex);
-    document.getElementById("counter").innerHTML = currentQuestionIndex;
-    return currentQuestionIndex;
-    //setNextQuestion();
-});
-
-$("#again").click(function() {
-  
-  $("#victory").addClass("hide");
-  $("#link-victory").addClass("hide"); // temporary navigation
-  $(".answers-counter").addClass("hide");
-  $("#categories").removeClass("hide");
-  $("body").removeClass("background-blurry").addClass("index-image");
-});
-
-// temporary navigation
-$("#link-victory").click(function() {  
-  
-  $("#link-victory").addClass("hide");
-  $("#timer-btn").addClass("hide");
-  $("#question-wrapper").addClass("hide");
-  $("#victory").removeClass("hide");
-  $("body").removeClass("background-blurry").addClass("index-image");
-});
-
-// FUNCTIONS
-
-// Picks only the first question and presents the UI
-async function setFirstQuestion() {
-    let setFirstQuestion = await fetchQuestionsGeneral();
-    currentQuestionIndex = 0
-    questionElement.innerHTML = questionsArray[0];
-    
-    let allAnswers = [correctAnswer[0], ...arrayOfIncorrectAnswers[0]];
-    let shuffledAnswers = allAnswers.sort(() => Math.random() - .5)
-    console.log("Array of shuffled answers:", shuffledAnswers);
-
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-    }
-
-    shuffledAnswers.forEach(answer => {
-        const button = document.createElement('button')
-        button.innerText = answer       
-        button.classList.add("btn", "answer", "btn-scaled")
-        answerButtonsElement.appendChild(button)
-    })
-
-    setQuestionUI();
-    selectAnswer();
-    //return currentQuestionIndex;
+function setFirstQuestion() {
+    currentQuestionIndex = 0;
+    allQuestions = [...questions];
+    setNextQuestion();
 }
 
 function setNextQuestion() {
-
-    questionElement.innerHTML = questionsArray[currentQuestionIndex];
-    
-    let allAnswers = [correctAnswer[currentQuestionIndex], ...arrayOfIncorrectAnswers[currentQuestionIndex]];
-    let shuffledAnswers = allAnswers.sort(() => Math.random() - .5)
-    //console.log("Array of shuffled answers:", shuffledAnswers);
-
-    while (answerButtonsElement.firstChild) {
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+    if(allQuestions.length === 0 || currentQuestionIndex >= MAX_QUESTIONS) {
+        return victoryScreen();
     }
+    currentQuestionIndex++;
+    document.getElementById("counter").innerHTML = currentQuestionIndex;
+    const questionNumber= Math.floor(Math.random() * allQuestions.length);
+    currentQuestion = allQuestions[questionNumber];
+    question.innerText = currentQuestion.question;
 
-    shuffledAnswers.forEach(answer => {
-        const button = document.createElement('button')
-        button.innerText = answer       
-        button.classList.add('btn')
-        answerButtonsElement.appendChild(button)
-    })
-    setTimer();
+    answerButtons.forEach(answer => {
+        const answerNumber = answer.dataset["number"];
+        answer.innerText = currentQuestion["answer" + answerNumber];
+      });
+
+    allQuestions.splice(questionNumber, 1);
+
+    chooseAnswers = true;
 }
 
 // Countdown timer
@@ -161,11 +132,55 @@ function setTimer() {
     });
 }
 
+answerButtons.forEach(answer => {
+    answer.addEventListener('click', e => {
+        if(!chooseAnswers) return;
+
+        chooseAnswers = false;
+        const selectedButton = e.target;
+        const selectedAnswer = selectedButton.dataset["number"];
+
+        let classToApply = 'wrong';
+            if (selectedAnswer == currentQuestion.rightAnswer) {
+                classToApply = 'correct';
+                $("#next-btn").removeClass("hide");
+                $("#timer-btn").addClass("hide");
+                $("#next-btn").click(function() {
+                    $(".answer").removeClass("correct");
+                    });
+                } else {
+                    $(selectedButton).addClass("wrong");
+                    wrongAnswer();
+                    disableOtherAnswers();
+                };
+            
+        
+        selectedButton.classList.add(classToApply);
+    });
+});
+
+// click on next button
+$("#next-btn").click(function() {
+    $("#next-btn").addClass("hide");
+    $("#timer-btn").removeClass("hide");
+    enableAnswers();
+    setNextQuestion();
+});
+
 // Go back to category selection after failed answer or timed out
 function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
+}
+
+// After clicking an answer, disable other ones
+function disableOtherAnswers() {
+    $(".answer").not(this).prop("disabled", true);
+}
+
+function enableAnswers() {
+    $(".answer").prop("disabled", false);
 }
 
 // Returns the player to category selection
@@ -177,25 +192,47 @@ function questionsToCategories() {
     document.body.classList.remove("background-blurry")
     document.body.classList.add("index-image")
     linkVictory.className = "hide";
+    $(".answer").removeClass("wrong").removeClass("correct");
+    enableAnswers(answerButtons);
 }
 
-// Checks if the answer is correct or not, adds apropriate class and displays apropriate button
-function selectAnswer() {
-    $(".answer").click(function(){
-        if (correctAnswer.includes(this.innerText)) {
-            $(this).addClass("correct");
-            disableOtherAnswers()
-            nextButton.classList.remove("hide")
-            timerButton.classList.add("hide")
-        } else {
-            $(this).addClass("wrong");
-            wrongAnswer()
-            disableOtherAnswers()
-            }
-    });
-} 
-
-// After clicking an answer, disable other ones
-function disableOtherAnswers() {
-    $(".answer").not(this).prop("disabled", true);
+function fetchQuestionsFromApi(categoryNumber) {
+    return fetch("https://opentdb.com/api.php?amount=15&category=${categoryNumber}&type=multiple")
+        .then(results => {
+            checkResults(results);
+            return results.json()
+        })
+        .then(data => {
+            exportJsonData(data);
+        })
+        .catch(err => {
+            console.error(err);
+        })
 }
+
+function victoryScreen() {
+    $("#link-victory").addClass("hide");
+    //$("#timer-btn").addClass("hide");
+    $("#question-wrapper").addClass("hide");
+    $("#victory").removeClass("hide");
+    $("body").removeClass("background-blurry").addClass("index-image");
+}
+
+$("#again").click(function() {
+  
+  $("#victory").addClass("hide");
+  $("#link-victory").addClass("hide"); // temporary navigation
+  $("#categories").removeClass("hide");
+  $("body").removeClass("background-blurry").addClass("index-image");
+  $("#question-counter").addClass("hide");
+});
+
+// temporary navigation
+$("#link-victory").click(function() {  
+  
+  $("#link-victory").addClass("hide");
+  $("#timer-btn").addClass("hide");
+  $("#question-wrapper").addClass("hide");
+  $("#victory").removeClass("hide");
+  $("body").removeClass("background-blurry").addClass("index-image");
+});

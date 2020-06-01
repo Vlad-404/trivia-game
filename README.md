@@ -104,16 +104,14 @@ Icons were used from a FontAwesome page for correct and incorrect answers and fo
 Trivia games have a simple nature so this project was focused on basic things working as best as possible:
 
 * one screen leads you seemlesly into another one so there is no need for navigation. Each button leads you to only logicall place you can go, i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is inaccessible once you start the game as it is irrelevant once you start the game.
-* there is a victory checkup to prevent user accessing victory screen without having the winner condition in current category.
 * there is a correct answer counter and total number of questions so this game can be played even with multiple people. Correct answers can be used as a point system in possible multiplayer environment.
-* check mechanic was added to prevent people from going back or forward on a page to get a correct answer/skip a question once they start the game. Once user goes back, warning is displayed and if user chooses to ignore it, progress is reset.
+* alert mechanic was added to warn people from going back, forward or reloading the page once they start the game. Once user tries to reload the page(either by going back or reloading the page), warning is displayed and if user chooses to ignore it, page reloads and progress is reset.
 * correct answer wasn't offered once user selects the wrong one. I wanted to discourage the user from getting the correct answer from the game by cheating, and using it later.
-* refreshing page leaves user with the same question and saves the progress - another anti-cheat measure.
-* there are 3 levels of difficulty: once game starts, every 5 questions, game pulls questions from a poll of increasingly difficult questions. There are 15 questions in each category per session. As there are many questions from the database, each question is randomly chosen from a category depending on difficulty.
-* a timer is used to give user 12 seconds to read and answer the question. If answer isn't selected in that time, wrong answer screen pops up and points a user to category selection. No answer is selected in this case, only wrong answer screen.
+* a timer is used to give user 12 seconds to read and answer the question. If answer isn't selected in that time, wrong answer screen pops up and points a user to category selection. No answer is selected in this case.
 
 ## Features left to implement
 
+* Difficulty increase - one of the initial ideas was to increase the difficulty after 5 questions, but due to my skills and time restrictions, it was left out.
 ...
 
 # Technologies used
@@ -176,6 +174,15 @@ List of bugs found:
     * when expecting the question, nothing was shown
     * sync issues: local code was executing faster than api could load the data
     * implemented async function
+* •	After answering incorrectly, when restarting the game, checking for the correct answer and selecting the answer didn't work
+    * after choosing an incorrect answer and restarting the game
+    * answer buttons weren't selectable
+    * added function enableAnswers which removed disableOtherAnswers function
+* After achieving the victory and restarting the game, correct answer counter did not show
+    * after winning and restarting the game
+    * one of the methods in #again button click event, hid the inner class of #question-counter container
+    * removed the method that hid the inner container (learned the importance of)
+
 
 ...
 
