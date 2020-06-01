@@ -5,7 +5,7 @@ let currentQuestionIndex = 0;
 //interactive elements
 const questionElement = document.getElementById("question");
 const restartButton = document.getElementById("restart-btn");
-const nextButton = document.getElementById('next-btn');
+const nextButton = document.getElementById("next-btn");
 const timerButton = document.getElementById("timer-btn");
 const categoryButtons = document.getElementsByClassName("category-btn");
 const answerButtons = Array.from(document.getElementsByClassName("answer"));
@@ -104,6 +104,7 @@ function setNextQuestion() {
     allQuestions.splice(questionNumber, 1);
 
     chooseAnswers = true;
+    setTimer()
 }
 
 // Countdown timer
@@ -121,6 +122,7 @@ function setTimer() {
             timerButton.addEventListener("click", function(){
                 timerButton.classList.remove("wrong");
                 questionsToCategories();
+                //questionCounter.setAttribute("class", "");
             })
         } else {
             document.getElementById("timer-btn").innerHTML = timeleft + " s";
