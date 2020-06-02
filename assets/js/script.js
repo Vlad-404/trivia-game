@@ -23,8 +23,8 @@ let allQuestions = [];
 const correctAnswer = [];
 const arrayOfIncorrectAnswers = [];
 
-let questions = [       // temporary
-    {
+let questions = [];
+    /*{
       question: "Inside which HTML element do we put the JavaScript??",
       answer1: "<script>",
       answer2: "<javascript>",
@@ -49,11 +49,37 @@ let questions = [       // temporary
       answer4: "alert('Hello World');",
       rightAnswer: 4
     }
-  ];
+  ];*/
+
+fetch("https://opentdb.com/api.php?amount=15&category=9&type=multiple")
+  .then(res => {
+      return res.json();
+  })
+  .then(loadedQuestions => {
+      console.log(loadedQuestions.results);
+      questions = loadedQuestions.results.map( loadedQuestions => {
+          const formattedQuestion = {
+              question: loadedQuestions.question
+          };
+          const eachAnswer = [...loadedQuestions.incorrect_answers];
+          formattedQuestion.rightAnswer = Math.floor(Math.random()*3) + 1;
+          eachAnswer.splice(formattedQuestion.rightAnswer -1, 0, loadedQuestions.correct_answer);
+
+          eachAnswer.forEach((rightAnswer, index) => {
+              formattedQuestion["answer" + (index+1)] = rightAnswer;
+          })
+
+          return formattedQuestion;
+      });
+      setFirstQuestion();
+  })
+  .catch(err => {
+      console.error(err);
+  });
 
 let chooseAnswers = true;
 
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 15;
 
 $("#start-button").click(function() {
   
@@ -75,7 +101,6 @@ function setQuestionUI() {
     $("body").removeClass("index-image").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
     $("#link-victory").removeClass("hide");  // temporary navigation
-    //$("#question-counter").removeClass("hide");
     $("#timer-btn").removeClass("hide");
     //setTimer();
 }
@@ -104,7 +129,7 @@ function setNextQuestion() {
     allQuestions.splice(questionNumber, 1);
 
     chooseAnswers = true;
-    setTimer()
+    //setTimer()
 }
 
 // Countdown timer
@@ -121,6 +146,7 @@ function setTimer() {
             $(".answer").prop("disabled", true);
             timerButton.addEventListener("click", function(){
                 timerButton.classList.remove("wrong");
+                
                 questionsToCategories();
                 //questionCounter.setAttribute("class", "");
             })
@@ -132,6 +158,9 @@ function setTimer() {
     $(".answer").click(function() {
         clearTimeout(countdownTimer);
     });
+    /*$(".category-btn").click(function() {
+        clearTimeout(countdownTimer);
+    }); */
 }
 
 answerButtons.forEach(answer => {
@@ -174,6 +203,7 @@ function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
+    //questionCounter.setAttribute("class", "hide");
 }
 
 // After clicking an answer, disable other ones
@@ -197,7 +227,7 @@ function questionsToCategories() {
     $(".answer").removeClass("wrong").removeClass("correct");
     enableAnswers(answerButtons);
 }
-
+/*
 function fetchQuestionsFromApi(categoryNumber) {
     return fetch("https://opentdb.com/api.php?amount=15&category=${categoryNumber}&type=multiple")
         .then(results => {
@@ -210,7 +240,7 @@ function fetchQuestionsFromApi(categoryNumber) {
         .catch(err => {
             console.error(err);
         })
-}
+}  */
 
 function victoryScreen() {
     $("#link-victory").addClass("hide");

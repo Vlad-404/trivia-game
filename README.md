@@ -154,10 +154,11 @@ List of bugs found:
     * an issue with Gitpod
     * pulled the latest changes from Github
 
-* After wining the game, select another category button didn't work
-    * when checking the code with dev tools
-    * question counter div was covering the button
+* After wining the game, select another category button (```#again```) didn't work
+    * only when checking the code with dev tools
+    * question counter div was covering the button when div tools were displayed at the bottom of the page
     * increased the z-index of the button
+
 * a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
     * found it by loading the page next day
     * missing / (slash) on closing button ```(</button>)``` element in HTML
@@ -167,9 +168,9 @@ List of bugs found:
     * Uncaught ReferenceError: timeleft is not defined - in script.js
     * corrected timeLeft variable to timeleft
 * Countdown timer didn't reset after clicking anything but "Time's Up!" button
-    * after clicking on "Incorrect!" and "Correct!" buttons
-    * countdown didn't reset and often I could see 2 countdowns competing
-    * looking for a solution
+    * after clicking on "Incorrect!" and "Correct!" buttons I could see 2 countdowns competing
+    * reseting countdown wasn't implemented correctly (in the right place)
+    * added ```clearTimeout``` method to ```countdownTimer``` within the ```setTimer``` function. ```clearTimeout``` was triggered by clicking on any answer
 * Issues with awaiting for the data from api to be ready
     * when expecting the question, nothing was shown
     * sync issues: local code was executing faster than api could load the data
@@ -177,12 +178,15 @@ List of bugs found:
 * •	After answering incorrectly, when restarting the game, checking for the correct answer and selecting the answer didn't work
     * after choosing an incorrect answer and restarting the game
     * answer buttons weren't selectable
-    * added function enableAnswers which removed disableOtherAnswers function
+    * added function ```enableAnswers``` which contrasted ```disableOtherAnswers``` function
 * After achieving the victory and restarting the game, correct answer counter did not show
     * after winning and restarting the game
-    * one of the methods in #again button click event, hid the inner class of #question-counter container
+    * one of the methods in ```#again``` button click event, hid the inner class of ```#question-counter``` container
     * removed the method that hid the inner container (learned the importance of)
-
+* When selecting the wrong answer, correct answer counter (```#question-counter```) disappeared
+    * found it when clicking on a wrong answer
+    * in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
+    * removed the method in ```wrongAnswer``` function 
 
 ...
 
