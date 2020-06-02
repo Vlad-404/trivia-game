@@ -9,13 +9,11 @@ const nextButton = document.getElementById("next-btn");
 const timerButton = document.getElementById("timer-btn");
 const categoryButtons = document.getElementsByClassName("category-btn");
 const answerButtons = Array.from(document.getElementsByClassName("answer"));
-let linkVictory = document.getElementById("link-victory") // temporary navigation
 
 //containers
 const questionWrapper = document.getElementById("question-wrapper");
 const loadingScreen = document.getElementById("loading-screen");
 const questionCounter = document.getElementById("question-counter");
-//const answerButtonsElement = document.getElementById("answers-div");
 
 //arrays
 let currentQuestion = {};
@@ -24,34 +22,8 @@ const correctAnswer = [];
 const arrayOfIncorrectAnswers = [];
 
 let questions = [];
-    /*{
-      question: "Inside which HTML element do we put the JavaScript??",
-      answer1: "<script>",
-      answer2: "<javascript>",
-      answer3: "<js>",
-      answer4: "<scripting>",
-      rightAnswer: 1
-    },
-    {
-      question:
-        "What is the correct syntax for referring to an external script called 'xxx.js'?",
-        answer1: "<script href='xxx.js'>",
-        answer2: "<script name='xxx.js'>",
-        answer3: "<script src='xxx.js'>",
-        answer4: "<script file='xxx.js'>",
-      rightAnswer: 3
-    },
-    {
-      question: " How do you write 'Hello World' in an alert box?",
-      answer1: "msgBox('Hello World');",
-      answer2: "alertBox('Hello World');",
-      answer3: "msg('Hello World');",
-      answer4: "alert('Hello World');",
-      rightAnswer: 4
-    }
-  ];*/
 
-fetch("https://opentdb.com/api.php?amount=15&category=9&type=multiple")
+fetch("https://opentdb.com/api.php?amount=5&category=9&type=multiple")
   .then(res => {
       return res.json();
   })
@@ -79,7 +51,7 @@ fetch("https://opentdb.com/api.php?amount=15&category=9&type=multiple")
 
 let chooseAnswers = true;
 
-const MAX_QUESTIONS = 15;
+const MAX_QUESTIONS = 5;
 
 $("#start-button").click(function() {
   
@@ -100,7 +72,6 @@ function setQuestionUI() {
     $("#loading-screen").addClass("hide");
     $("body").removeClass("index-image").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
-    $("#link-victory").removeClass("hide");  // temporary navigation
     $("#timer-btn").removeClass("hide");
     //setTimer();
 }
@@ -253,18 +224,8 @@ function victoryScreen() {
 $("#again").click(function() {
   
   $("#victory").addClass("hide");
-  $("#link-victory").addClass("hide"); // temporary navigation
   $("#categories").removeClass("hide");
   $("body").removeClass("background-blurry").addClass("index-image");
   $("#question-counter").addClass("hide");
-});
-
-// temporary navigation
-$("#link-victory").click(function() {  
-  
-  $("#link-victory").addClass("hide");
-  $("#timer-btn").addClass("hide");
-  $("#question-wrapper").addClass("hide");
-  $("#victory").removeClass("hide");
-  $("body").removeClass("background-blurry").addClass("index-image");
+  questions.length = 0;
 });
