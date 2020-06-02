@@ -23,49 +23,20 @@ const arrayOfIncorrectAnswers = [];
 
 let questions = [];
 
-fetch("https://opentdb.com/api.php?amount=5&category=9&type=multiple")
-  .then(res => {
-      return res.json();
-  })
-  .then(loadedQuestions => {
-      console.log(loadedQuestions.results);
-      questions = loadedQuestions.results.map( loadedQuestions => {
-          const formattedQuestion = {
-              question: loadedQuestions.question
-          };
-          const eachAnswer = [...loadedQuestions.incorrect_answers];
-          formattedQuestion.rightAnswer = Math.floor(Math.random()*3) + 1;
-          eachAnswer.splice(formattedQuestion.rightAnswer -1, 0, loadedQuestions.correct_answer);
-
-          eachAnswer.forEach((rightAnswer, index) => {
-              formattedQuestion["answer" + (index+1)] = rightAnswer;
-          })
-
-          return formattedQuestion;
-      });
-      setFirstQuestion();
-  })
-  .catch(err => {
-      console.error(err);
-  });
-
 let chooseAnswers = true;
 
 const MAX_QUESTIONS = 5;
 
 $("#start-button").click(function() {
-  
   $("#welcome").addClass("hide");
   $("#categories").removeClass("hide");
 });
 
 $(".category-btn").click(function() {
-
   $("#categories").addClass("hide");
   $("#loading-screen").removeClass("hide");
   questionCounter.setAttribute("class", "");
-  setQuestionUI();
-  setFirstQuestion()
+  fetchQuestions();
 });
 
 function setQuestionUI() {
@@ -81,6 +52,35 @@ function setFirstQuestion() {
     allQuestions = [...questions];
     setNextQuestion();
 }
+
+function fetchQuestions() {
+    fetch("https://opentdb.com/api.php?amount=5&category=9&type=multiple")
+    .then(res => {
+        return res.json();
+    })
+    .then(loadedQuestions => {
+        console.log(loadedQuestions.results);
+        questions = loadedQuestions.results.map( loadedQuestions => {
+            const formattedQuestion = {
+                question: loadedQuestions.question
+            };
+            const eachAnswer = [...loadedQuestions.incorrect_answers];
+            formattedQuestion.rightAnswer = Math.floor(Math.random()*3) + 1;
+            eachAnswer.splice(formattedQuestion.rightAnswer -1, 0, loadedQuestions.correct_answer);
+
+            eachAnswer.forEach((rightAnswer, index) => {
+                formattedQuestion["answer" + (index+1)] = rightAnswer;
+            })
+
+            return formattedQuestion;
+        });
+        setQuestionUI();
+        setFirstQuestion();
+    })
+    .catch(err => {
+        console.error(err);
+    });
+};
 
 function setNextQuestion() {
     if(allQuestions.length === 0 || currentQuestionIndex >= MAX_QUESTIONS) {
@@ -194,7 +194,6 @@ function questionsToCategories() {
     restartButton.className = "question-btn btn wrong hide";
     document.body.classList.remove("background-blurry")
     document.body.classList.add("index-image")
-    linkVictory.className = "hide";
     $(".answer").removeClass("wrong").removeClass("correct");
     enableAnswers(answerButtons);
 }
