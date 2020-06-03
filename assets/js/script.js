@@ -59,7 +59,7 @@ function categoriesToQuestions(categoryNumber) {
     $("#loading-screen").removeClass("hide");
     questionCounter.setAttribute("class", "");
     fetchQuestions(categoryNumber);
-    console.log(categoryNumber);
+    //console.log(categoryNumber);
 }
 
 function setQuestionUI() {
@@ -123,15 +123,15 @@ function setNextQuestion() {
     allQuestions.splice(questionNumber, 1);
 
     chooseAnswers = true;
-    //setTimer()
+    setTimer()
 }
 
 // Countdown timer
 let countdownTimer;
 
 function setTimer() {
-    timerButton.innerHTML = "6 s"
-    let timeleft = 5;
+    timerButton.innerHTML = "12 s"
+    let timeleft = 11;
     let countdownTimer = setInterval(function(){
         if(timeleft <= 0){
             clearInterval(countdownTimer);
@@ -236,5 +236,4 @@ $("#again").click(function() {
   $("body").removeClass("background-blurry").addClass("index-image");
   $("#question-counter").addClass("hide");
   questions.length = 0;
-  let categoryNumber = 0;
 });
