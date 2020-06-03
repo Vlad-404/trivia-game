@@ -27,17 +27,40 @@ let chooseAnswers = true;
 
 const MAX_QUESTIONS = 5;
 
+let categoryNumber;
+
 $("#start-button").click(function() {
   $("#welcome").addClass("hide");
   $("#categories").removeClass("hide");
 });
 
-$(".category-btn").click(function() {
-  $("#categories").addClass("hide");
-  $("#loading-screen").removeClass("hide");
-  questionCounter.setAttribute("class", "");
-  fetchQuestions();
+$("#category-9").click(function() {
+    let categoryNumber = 9;
+    categoriesToQuestions(categoryNumber);
+  });
+
+$("#category-15").click(function() {
+    let categoryNumber = 15;
+    categoriesToQuestions(categoryNumber);
 });
+
+$("#category-22").click(function() {
+    let categoryNumber = 22;
+    categoriesToQuestions(categoryNumber);
+});
+
+$("#category-14").click(function() {
+    let categoryNumber = 14;
+    categoriesToQuestions(categoryNumber);
+});
+
+function categoriesToQuestions(categoryNumber) {
+    $("#categories").addClass("hide");
+    $("#loading-screen").removeClass("hide");
+    questionCounter.setAttribute("class", "");
+    fetchQuestions(categoryNumber);
+    console.log(categoryNumber);
+}
 
 function setQuestionUI() {
     $("#loading-screen").addClass("hide");
@@ -47,14 +70,8 @@ function setQuestionUI() {
     //setTimer();
 }
 
-function setFirstQuestion() {
-    currentQuestionIndex = 0;
-    allQuestions = [...questions];
-    setNextQuestion();
-}
-
-function fetchQuestions() {
-    fetch("https://opentdb.com/api.php?amount=5&category=9&type=multiple")
+function fetchQuestions(categoryNumber) {
+    fetch(`https://opentdb.com/api.php?amount=15&category=${categoryNumber}&type=multiple`)
     .then(res => {
         return res.json();
     })
@@ -81,6 +98,12 @@ function fetchQuestions() {
         console.error(err);
     });
 };
+
+function setFirstQuestion() {
+    currentQuestionIndex = 0;
+    allQuestions = [...questions];
+    setNextQuestion();
+}
 
 function setNextQuestion() {
     if(allQuestions.length === 0 || currentQuestionIndex >= MAX_QUESTIONS) {
@@ -197,20 +220,6 @@ function questionsToCategories() {
     $(".answer").removeClass("wrong").removeClass("correct");
     enableAnswers(answerButtons);
 }
-/*
-function fetchQuestionsFromApi(categoryNumber) {
-    return fetch("https://opentdb.com/api.php?amount=15&category=${categoryNumber}&type=multiple")
-        .then(results => {
-            checkResults(results);
-            return results.json()
-        })
-        .then(data => {
-            exportJsonData(data);
-        })
-        .catch(err => {
-            console.error(err);
-        })
-}  */
 
 function victoryScreen() {
     $("#link-victory").addClass("hide");
@@ -227,4 +236,5 @@ $("#again").click(function() {
   $("body").removeClass("background-blurry").addClass("index-image");
   $("#question-counter").addClass("hide");
   questions.length = 0;
+  let categoryNumber = 0;
 });
