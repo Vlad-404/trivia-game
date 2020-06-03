@@ -130,8 +130,8 @@ function setNextQuestion() {
 let countdownTimer;
 
 function setTimer() {
-    timerButton.innerHTML = "12 s"
-    let timeleft = 11;
+    timerButton.innerHTML = "15 s"
+    let timeleft = 14;
     let countdownTimer = setInterval(function(){
         if(timeleft <= 0){
             clearInterval(countdownTimer);

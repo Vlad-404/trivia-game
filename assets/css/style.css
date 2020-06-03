@@ -55,7 +55,7 @@ body.wrong {
 }
 
 .top-spacing {
-    margin-top: 15rem;
+    margin-top: 10rem;
 }
 
 .container {
@@ -186,25 +186,4 @@ body.wrong {
         width: 100%;
         margin-top: 10px;
     }
-}
-
-/* temporary navigation */
-
-.temp-div {
-    position: absolute;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    letter-spacing: 2px;
-}
-
-.temp-list {
-    list-style-type: none;
-}
-
-.temp-list li {
-  float: right;
-  text-decoration: none;
-  text-align: inline;
-  color: white;
 }
