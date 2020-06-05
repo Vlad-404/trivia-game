@@ -1,6 +1,6 @@
 # TRIVIA GAME
 
-![Desktop Demo](https://github.com/Vlad-404/trivia-game/tree/master/assets/images/mockup.JPG "Desktop Demo")
+![Desktop Demo](https://github.com/Vlad-404/trivia-game/blob/master/assets/images/mockup.JPG "Desktop Demo")
 
 Are you ready to become rich...in knowledge? Then look no further, as this trivia game will test your knowledge in 4 different categories. 
 
