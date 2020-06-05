@@ -1,5 +1,7 @@
 # TRIVIA GAME
 
+![Desktop Demo](https://github.com/Vlad-404/trivia-game/tree/master/assets/images/mockup.JPG "Desktop Demo")
+
 Are you ready to become rich...in knowledge? Then look no further, as this trivia game will test your knowledge in 4 different categories. 
 
 Welcome to the first game I made. I hope you will enjoy it.
@@ -143,11 +145,11 @@ List of bugs found:
     * changed the ID's of the elements affected
 * Gitpod didn't load latest commits after I came back to it a day after
     * when I opened Gitpod, nothing I was working last session didn't load
-    * an issue with Gitpod
+    * an issue with Gitpod or my browser local storage
     * pulled the latest changes from Github
 * After wining the game, select another category button (```#again```) didn't work
     * only when checking the code with dev tools
-    * question counter div was covering the button when devtools were displayed at the bottom of the page
+    * when devtools were displayed at the bottom of the page, question counter div was covering the button
     * increased the z-index of the button
 * a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
     * found it by loading the page next day
@@ -177,6 +179,10 @@ List of bugs found:
     * found it when clicking on a wrong answer
     * in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
     * removed the method in ```wrongAnswer``` function 
+* Timer button is selectable in certain cases
+    * when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection
+    * looking for cause...
+    * looking for a solution...
 
 ## User stories Testing
 
@@ -226,7 +232,7 @@ Only image used as a background was used from free wallpaper website: https://wa
 - Huge thank you to my mentor Simen for helping me chose the topic providing a starting resources and helping me along the way
 - big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who provide their resources for free.
 - [Stack Overflow](https://stackoverflow.com/) for hosting helpful discussions which helped me during my project.
-- [WebDev simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw) and [James Q Quick](https://www.youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw) for their extremly helpful videos and channels that helped me build this game.
+- [WebDev simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw) and [James Q Quick](https://www.youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw) for being an inspiration to build this game.
 - Code institute slack community that was patient enough with my questions.
 
 # Disclaimer
