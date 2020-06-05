@@ -1,6 +1,7 @@
 // VARIABLES
 
-let currentQuestionIndex = 0;
+let currentQuestionIndex;
+let categoryNumber;
 
 //interactive elements
 const questionElement = document.getElementById("question");
@@ -18,57 +19,23 @@ const questionCounter = document.getElementById("question-counter");
 //arrays
 let currentQuestion = {};
 let allQuestions = [];
-const correctAnswer = [];
-const arrayOfIncorrectAnswers = [];
-
 let questions = [];
 
 let chooseAnswers = true;
-
 const MAX_QUESTIONS = 5;
-
-let categoryNumber;
 
 $("#start-button").click(function() {
   $("#welcome").addClass("hide");
   $("#categories").removeClass("hide");
 });
 
-$("#category-9").click(function() {
-    let categoryNumber = 9;
-    categoriesToQuestions(categoryNumber);
-  });
-
-$("#category-15").click(function() {
-    let categoryNumber = 15;
-    categoriesToQuestions(categoryNumber);
+$(".category-btn").click(function() {
+  let categoryNumber = this.getAttribute("category");
+  $("#categories").addClass("hide");
+  $("#loading-screen").removeClass("hide");
+  questionCounter.setAttribute("class", "");
+  fetchQuestions(categoryNumber);
 });
-
-$("#category-22").click(function() {
-    let categoryNumber = 22;
-    categoriesToQuestions(categoryNumber);
-});
-
-$("#category-14").click(function() {
-    let categoryNumber = 14;
-    categoriesToQuestions(categoryNumber);
-});
-
-function categoriesToQuestions(categoryNumber) {
-    $("#categories").addClass("hide");
-    $("#loading-screen").removeClass("hide");
-    questionCounter.setAttribute("class", "");
-    fetchQuestions(categoryNumber);
-    //console.log(categoryNumber);
-}
-
-function setQuestionUI() {
-    $("#loading-screen").addClass("hide");
-    $("body").removeClass("index-image").addClass("background-blurry");
-    $("#question-wrapper").removeClass("hide");
-    $("#timer-btn").removeClass("hide");
-    //setTimer();
-}
 
 function fetchQuestions(categoryNumber) {
     fetch(`https://opentdb.com/api.php?amount=15&category=${categoryNumber}&type=multiple`)
@@ -98,6 +65,13 @@ function fetchQuestions(categoryNumber) {
         console.error(err);
     });
 };
+
+function setQuestionUI() {
+    $("#loading-screen").addClass("hide");
+    $("body").removeClass("index-image").addClass("background-blurry");
+    $("#question-wrapper").removeClass("hide");
+    $("#timer-btn").removeClass("hide");
+}
 
 function setFirstQuestion() {
     currentQuestionIndex = 0;
