@@ -4,16 +4,12 @@ let currentQuestionIndex;
 let categoryNumber;
 
 //interactive elements
-const questionElement = document.getElementById("question");
 const restartButton = document.getElementById("restart-btn");
-const nextButton = document.getElementById("next-btn");
 const timerButton = document.getElementById("timer-btn");
-const categoryButtons = document.getElementsByClassName("category-btn");
 const answerButtons = Array.from(document.getElementsByClassName("answer"));
 
 //containers
 const questionWrapper = document.getElementById("question-wrapper");
-const loadingScreen = document.getElementById("loading-screen");
 const questionCounter = document.getElementById("question-counter");
 
 //arrays
@@ -22,7 +18,7 @@ let allQuestions = [];
 let questions = [];
 
 let chooseAnswers = true;
-const MAX_QUESTIONS = 5;
+const MAX_QUESTIONS = 10;
 
 $("#start-button").click(function() {
   $("#welcome").addClass("hide");
@@ -38,7 +34,7 @@ $(".category-btn").click(function() {
 });
 
 function fetchQuestions(categoryNumber) {
-    fetch(`https://opentdb.com/api.php?amount=15&category=${categoryNumber}&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=10&category=${categoryNumber}&type=multiple`)
     .then(res => {
         return res.json();
     })
@@ -55,7 +51,6 @@ function fetchQuestions(categoryNumber) {
             eachAnswer.forEach((rightAnswer, index) => {
                 formattedQuestion["answer" + (index+1)] = rightAnswer;
             })
-
             return formattedQuestion;
         });
         setQuestionUI();
@@ -71,13 +66,13 @@ function setQuestionUI() {
     $("body").removeClass("index-image").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
     $("#timer-btn").removeClass("hide");
-}
+};
 
 function setFirstQuestion() {
     currentQuestionIndex = 0;
     allQuestions = [...questions];
     setNextQuestion();
-}
+};
 
 function setNextQuestion() {
     if(allQuestions.length === 0 || currentQuestionIndex >= MAX_QUESTIONS) {
@@ -98,7 +93,7 @@ function setNextQuestion() {
 
     chooseAnswers = true;
     setTimer()
-}
+};
 
 // Countdown timer
 let countdownTimer;
@@ -114,9 +109,7 @@ function setTimer() {
             $(".answer").prop("disabled", true);
             timerButton.addEventListener("click", function(){
                 timerButton.classList.remove("wrong");
-                
                 questionsToCategories();
-                //questionCounter.setAttribute("class", "");
             })
         } else {
             document.getElementById("timer-btn").innerHTML = timeleft + " s";
@@ -126,10 +119,7 @@ function setTimer() {
     $(".answer").click(function() {
         clearTimeout(countdownTimer);
     });
-    /*$(".category-btn").click(function() {
-        clearTimeout(countdownTimer);
-    }); */
-}
+};
 
 answerButtons.forEach(answer => {
     answer.addEventListener('click', e => {
@@ -171,17 +161,16 @@ function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
-    //questionCounter.setAttribute("class", "hide");
-}
+};
 
 // After clicking an answer, disable other ones
 function disableOtherAnswers() {
     $(".answer").not(this).prop("disabled", true);
-}
+};
 
 function enableAnswers() {
     $(".answer").prop("disabled", false);
-}
+};
 
 // Returns the player to category selection
 function questionsToCategories() {
@@ -193,15 +182,14 @@ function questionsToCategories() {
     document.body.classList.add("index-image")
     $(".answer").removeClass("wrong").removeClass("correct");
     enableAnswers(answerButtons);
-}
+};
 
 function victoryScreen() {
     $("#link-victory").addClass("hide");
-    //$("#timer-btn").addClass("hide");
     $("#question-wrapper").addClass("hide");
     $("#victory").removeClass("hide");
     $("body").removeClass("background-blurry").addClass("index-image");
-}
+};
 
 $("#again").click(function() {
   
