@@ -7,22 +7,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <link type="text/css" rel="stylesheet" href="assets/css/style.css">
         <link rel="shortcut icon" href="assets/images/favicon.png"> 
-        <title>Super awesome trivia game</title>
+        <title>Super awesome trivia</title>
     </head>
 
-    <body class="index-image">
-
-    <!-- temporary navigation -->
-        <nav class="temp-div">
-            <ul class="temp-list">
-                <li id="link-victory" class="hide">victory</li>
-            </ul>
-        </nav>
+    <body class="background-clear background-positioning">
 
     <!-- Welcome screen  -->
         <div id="welcome">
             <div>
-                <h1 class="welcome top-spacing">Welcome to the Super Awesome Trivia game!</h1>
+                <h1 class="welcome top-spacing">Welcome to the Super Awesome Trivia!</h1>
             </div>
 
             <div class="controlls top-spacing">
@@ -38,10 +31,10 @@
                 <div class="question-title">Please select a category:</div>
                     
                 <div class="btn-grid top-spacing">
-                    <button class="btn no-style category-btn btn-scaled" category="9">General knowledge</button>
-                    <button class="btn no-style category-btn btn-scaled" category="15">Games</button>
-                    <button class="btn no-style category-btn btn-scaled" category="22">Geography</button>
-                    <button class="btn no-style category-btn btn-scaled" category="14">Television</button>
+                    <button class="btn no-style category-btn btn-scaled" data-category="9">General knowledge</button>
+                    <button class="btn no-style category-btn btn-scaled" data-category="15">Games</button>
+                    <button class="btn no-style category-btn btn-scaled" data-category="22">Geography</button>
+                    <button class="btn no-style category-btn btn-scaled" data-category="14">Television</button>
                 </div>
             </div>
         </div>
@@ -49,12 +42,12 @@
     <!-- Loading screen -->
         <div id="loading-screen" class="container no-style hide">
             <h1 class="question-title">Preparing questions...</h1>
-            <img src="assets/images/loading.gif" width="50%" height="30%" alt="Loading animation...">
+            <img src="assets/images/loading.gif" class = "loader-image" alt="Loading animation...">
         </div>
         
     <!-- Question screen -->
 
-        <div id="question-wrapper" class="container hide">
+        <div id="question-wrapper" class="container hide bottom-margin">
 
             <div id="question-container">
                 <div class="question-title">Question:</div>
@@ -70,8 +63,8 @@
             </div>
 
             <div id="controlls" class="controlls">
-                <button id="next-btn" class="question-btn btn correct hide">Correct!</button>
-                <button id="restart-btn" class="question-btn btn wrong hide">Incorrect!</button>
+                <button id="next-btn" class="question-btn btn correct hide">Next question</button>
+                <button id="restart-btn" class="question-btn btn wrong hide">Restart!</button>
                 <button id="timer-btn" class="question-btn btn"></button>
             </div>
 

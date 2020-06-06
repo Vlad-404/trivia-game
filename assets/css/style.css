@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Source+Sans+Pro&display=swap');
 
-* {
-    font-family: 'Source Sans Pro', 'Arial Narrow', Calibri;
-}
-
 *::before, *::after {
     box-sizing: border-box;
 }
@@ -24,6 +20,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: hsl(var(--hue), 100%, 95%);
+    font-family: 'Source Sans Pro', 'Arial Narrow', Calibri;
 }
 
 body.correct {
@@ -42,14 +39,15 @@ body.wrong {
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
-.index-image {
+.background-clear {
     background-image: url("../images/background-clear.jpg");
-    background-size: cover;
-    background-position: center top;
 }
 
 .background-blurry {
     background-image: url("../images/background-blurry.jpg");
+}
+
+.background-positioning {
     background-size: cover;
     background-position: center top;
 }
@@ -59,12 +57,20 @@ body.wrong {
 }
 
 .container {
-    width: 800px;
-    max-width: 80%;
+    width: 80vw;
     background-color: white;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
+}
+
+.bottom-margin {
+    margin-bottom: 5rem;
+}
+
+.loader-image {
+    width: 50%;
+    height: 30%;
 }
 
 .no-style {
@@ -97,6 +103,7 @@ body.wrong {
     padding: 5px 10px;
     color: white;
     outline: none;
+    font-family: 'Source Sans Pro', 'Arial Narrow', Calibri;
 }
 
 .btn:hover {
@@ -133,6 +140,7 @@ body.wrong {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 #again {

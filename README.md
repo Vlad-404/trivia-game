@@ -16,7 +16,6 @@ Contents:
   * Design choices
     * Fonts
     * Colours
-    * Icons
 * Features
     * Features left to implement
 * Technologies used
@@ -67,7 +66,7 @@ You can find all the wireframes in the [wireframes](https://github.com/Vlad-404/
 
 ## User stories
 
-1. As a new visitor to the page, I want to be able to play a simple trivia game without too much hassle.
+1. As a user, I want to be able to play a simple trivia so I can play a game without too much hassle.
 2. As a new visitor to the page, I wanted to find a simple game of trivia so I can add some additional entertainment for us and our guests.
 3. As a returning visitor, I don't want to have same questions over and over again, but instead, I want new ones
 4. As a new user, I want to find a way to compete in knowledge with certain topics, so my freind and I can finally find out who knows games better.
@@ -90,11 +89,11 @@ The following fonts were chosen for the game:
 
 Choice of colours were brought down to a minimum as game of this kind needs just a handfull of colours .
 
-* neutral colour - blue #33BBFF - answer buttons, welcome and victory screen buttons
-* right answer - green #33FF88 - right answer
-* wrong answer - red #FF3333 - wrong answer
+* *blue #33BBFF* - used for answer buttons, start and victory screen buttons
+* *green #33FF88* - used for Next button and to color the right answer after clicking on it
+* *red #FF3333* - used for reset (incorrect) button, to color the wrong answer after clicking on it and to colorTime's up button when timer runs out.
 
-HSL color selection was used because it was easier to manipulate the colour changes using JavaScript/jQuerry. Also, I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
+I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
 
 # Features
 
@@ -124,70 +123,62 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * [JQuerry](https://jquery.com/)
 * [Font Awesome](https://fontawesome.com/)
 * [Google Fonts](https://fonts.google.com/)
-...
 
 # Testing
 
 ### Bugs during development
 
-How it works:
+<strong>List of bugs found:</strong>
 
-* This is a description of the bug
-    * how I found it
-    * what went wrong
-    * resolution
-
-List of bugs found:
-
-* Certain parts of code didn't work
-    * found out when code didn't execute
-    * found out that multiple elements had the same ID
-    * changed the ID's of the elements affected
-* Gitpod didn't load latest commits after I came back to it a day after
-    * when I opened Gitpod, nothing I was working last session didn't load
-    * an issue with Gitpod or my browser local storage
-    * pulled the latest changes from Github
-* After wining the game, select another category button (```#again```) didn't work
-    * only when checking the code with dev tools
-    * when devtools were displayed at the bottom of the page, question counter div was covering the button
-    * increased the z-index of the button
-* a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
-    * found it by loading the page next day
-    * missing / (slash) on closing button ```(</button>)``` element in HTML
-    * added / (slash) to a closing restart button
-* Countdown timer didn't work
-    * after loading the questions page, there was no countdown 
-    * Uncaught ReferenceError: timeleft is not defined - in script.js
-    * corrected ```timeLeft``` variable to ```timeleft``` (capitalization)
-* Countdown timer didn't reset after clicking anything but "Time's Up!" button
-    * after clicking on "Incorrect!" and "Correct!" buttons I could see 2 countdowns competing
-    * reseting countdown wasn't implemented correctly (in the right place)
-    * added ```clearTimeout``` method to ```countdownTimer``` within the ```setTimer``` function. ```clearTimeout``` was triggered by clicking on any answer
-* Issues with awaiting for the data from api to be ready
-    * when expecting the question, nothing was shown
-    * sync issues: local code was executing faster than api could load the data
-    * put the fetch function inside ```fetchQuestions``` function to be triggered on click event.
-* After answering incorrectly, when restarting the game, checking for the correct answer and selecting the answer didn't work
-    * after choosing an incorrect answer and restarting the game
-    * answer buttons weren't selectable
-    * added function ```enableAnswers``` which contrasted ```disableOtherAnswers``` function
-* After achieving the victory and restarting the game, correct answer counter did not show
-    * after winning and restarting the game
-    * one of the methods in ```#again``` button click event, hid the inner class of ```#question-counter``` container
-    * removed the method that hid the inner container (learned the importance of consistency)
-* When selecting the wrong answer, correct answer counter (```#question-counter```) disappeared
-    * found it when clicking on a wrong answer
-    * in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
-    * removed the method in ```wrongAnswer``` function 
-* Timer button is selectable in certain cases
-    * when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection
-    * looking for cause...
-    * looking for a solution...
+* <strong>Problem:</strong> Certain parts of code didn't work
+    * <strong>How I found it:</strong> found out when code didn't execute
+    * <strong>What went wrong:</strong> found out that multiple elements had the same ID
+    * <strong>Resolution:</strong> changed the ID's of the elements affected
+* <strong>Problem:</strong> Gitpod didn't load latest commits after I came back to it a day after
+    * <strong>How I found it:</strong> when I opened Gitpod, nothing I was working last session didn't load
+    * <strong>What went wrong:</strong> an issue with Gitpod or my browser local storage
+    * <strong>Resolution:</strong> pulled the latest changes from Github
+* <strong>Problem:</strong> After wining the game, select another category button (```#again```) didn't work
+    * <strong>How I found it:</strong> only when checking the code with dev tools
+    * <strong>What went wrong:</strong> when devtools were displayed at the bottom of the page, question counter div was covering the button
+    * <strong>Resolution:</strong> increased the z-index of the button
+* <strong>Problem:</strong> a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
+    * <strong>How I found it:</strong> found it by loading the page next day
+    * <strong>What went wrong:</strong> missing ```/``` (slash) on closing button (```</button>```) element in HTML
+    * <strong>Resolution:</strong> added ```/``` (slash) to a closing restart button
+* <strong>Problem:</strong> Countdown timer didn't work
+    * <strong>How I found it:</strong> after loading the questions page, there was no countdown 
+    * <strong>What went wrong:</strong> Uncaught ReferenceError: timeleft is not defined - in script.js
+    * <strong>Resolution:</strong> corrected ```time```<strong>L</strong>```eft``` variable to ```time```<strong>l</strong>```eft``` (capitalization)
+* <strong>Problem:</strong> Countdown timer didn't reset after clicking anything but "Time's Up!" button
+    * <strong>How I found it:</strong> after clicking on "Incorrect!" and "Correct!" buttons I could see 2 countdowns competing
+    * <strong>What went wrong:</strong> reseting countdown wasn't implemented correctly (in the right place)
+    * <strong>Resolution:</strong> added ```clearTimeout``` method to ```countdownTimer``` within the ```setTimer``` function. ```clearTimeout``` was triggered by clicking on any answer
+* <strong>Problem:</strong> Issues with awaiting for the data from api to be ready
+    * <strong>How I found it:</strong> when expecting the question, nothing was shown
+    * <strong>What went wrong:</strong> sync issues: local code was executing faster than api could load the data
+    * <strong>Resolution:</strong> put the fetch function inside ```fetchQuestions``` function to be triggered on click event.
+* <strong>Problem:</strong> After answering incorrectly, when restarting the game, checking for the correct answer and selecting the answer didn't work
+    * <strong>How I found it:</strong> after choosing an incorrect answer and restarting the game
+    * <strong>What went wrong:</strong> answer buttons weren't selectable
+    * <strong>Resolution:</strong> added function ```enableAnswers``` which contrasted ```disableOtherAnswers``` function
+* <strong>Problem:</strong> After achieving the victory and restarting the game, correct answer counter did not show
+    * <strong>How I found it:</strong> after winning and restarting the game
+    * <strong>What went wrong:</strong> one of the methods in ```#again``` button click event, hid the inner class of ```#question-counter``` container
+    * <strong>Resolution:</strong> removed the method that hid the inner container (learned the importance of consistency)
+* <strong>Problem:</strong> When <strong>selecting the wrong answer</strong>, correct answer counter (```#question-counter```) disappeared
+    * <strong>How I found it:</strong> found it when clicking on a wrong answer
+    * <strong>What went wrong:</strong> in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
+    * <strong>Resolution:</strong> removed the method in ```wrongAnswer``` function 
+* <strong>Problem:</strong> Timer button is selectable in certain cases
+    * <strong>How I found it:</strong> when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection
+    * <strong>What went wrong:</strong> looking for cause...
+    * <strong>Resolution:</strong> looking for a solution...
 
 ## User stories Testing
 
-1. As a new visitor to the page, I want to be able to play a simple trivia game without too much hassle.
-    * game was made so that the navigation is unnecessary, as each time user is presented with a choice, it leads user to only logical place. i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is inaccessible once you start the game as it is irrelevant once you start the game.
+1. As a user, I want to be able to play a simple trivia game without too much hassle.
+    * game was made so that the navigation is unnecessary, as each time user is presented with a choice, it leads user to only logical place. i.e. victory screen leads you to category selection, right answer leads you to next question, Welcome page is inaccessible once you start the game as it is irrelevant once you start.
 2. As a new visitor to the page, I wanted to find a simple game of trivia so I can add some additional entertainment for us and our guests.
     * a competitive feature was added in a shape of correct answer counter. This can be used a point system in multiplayer environment.
 3. As a returning visitor, I don't want to have same questions over and over again, but instead, I want new ones.
@@ -215,6 +206,19 @@ When deploying Trivia Game using GitHub Pages the following steps were made:
 * Clicked to confirm my selection.
 * Trivia game is now live on GitHub Pages.
 
+### Running trivia game Locally:
+
+Cloning trivia game from GitHub:
+
+* Navigate to github.com/Vlad-404/trivia-game.
+* Click the green '<strong>Clone or Download</strong>' button.
+* <strong>Copy</strong> the url in the dropdown box.
+* Using your favourite IDE, <strong>open up</strong> your preferred terminal.
+* <strong>Navigate</strong> to your desired file location.
+* <strong>Copy</strong> the following code and input it into your terminal to clone trivia game.
+
+    ```git clone https://github.com/Geomint/holiday-destinations.git```
+
 # Credits
 
 ## Content
@@ -227,16 +231,17 @@ Content for this game was based on "Who wants to be a millionaire" and the conte
 
 Only image used as a background was used from free wallpaper website: https://wallpapersafari.com/w/fW7pva. I used Gimp to add blurry effect for the questions background.
 
+# Disclaimer
+
+This page was built for educational purposes.
+
 ## Acknowledgments and thank you's
 
-- Huge thank you to my mentor Simen for helping me chose the topic providing a starting resources and helping me along the way
-- big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who provide their resources for free.
+- Huge thank you to my mentor [Simen](https://github.com/Eventyret) for helping me chose the topic providing a starting resources and helping me along the way.
+- big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who are providing their resources for free.
 - [Stack Overflow](https://stackoverflow.com/) for hosting helpful discussions which helped me during my project.
 - [WebDev simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw) and [James Q Quick](https://www.youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw) for being an inspiration to build this game.
 - Code institute slack community that was patient enough with my questions.
 
-# Disclaimer
 
-This page was built for educational purposes. All resources were used under fair usage and/or under free licence! If you find any content that violates your copyrights, please contact me on vmijat21@gmail.com
-
-Thank you for visiting my page and I hope you'll have fun playing the game.
+>*Thank you for visiting my page and I hope you'll have fun playing the game.*

@@ -1,23 +1,15 @@
-// VARIABLES
-let currentQuestionIndex;
-let categoryNumber;
-
-//interactive elements
-const restartButton = document.getElementById("restart-btn");
-const timerButton = document.getElementById("timer-btn");
 const answerButtons = Array.from(document.getElementsByClassName("answer"));
-
-//containers
 const questionWrapper = document.getElementById("question-wrapper");
 const questionCounter = document.getElementById("question-counter");
-
-//arrays
+const restartButton = document.getElementById("restart-btn");
+const timerButton = document.getElementById("timer-btn");
 let currentQuestion = {};
 let allQuestions = [];
 let questions = [];
-
 let chooseAnswers = true;
 const MAX_QUESTIONS = 10;
+let currentQuestionIndex;
+let categoryNumber;
 
 $("#start-button").click(function() {
   $("#welcome").addClass("hide");
@@ -25,7 +17,7 @@ $("#start-button").click(function() {
 });
 
 $(".category-btn").click(function() {
-  let categoryNumber = this.getAttribute("category");
+  let categoryNumber = this.getAttribute("data-category");
   $("#categories").addClass("hide");
   $("#loading-screen").removeClass("hide");
   questionCounter.setAttribute("class", "");
@@ -62,7 +54,7 @@ function fetchQuestions(categoryNumber) {
 
 function setQuestionUI() {
     $("#loading-screen").addClass("hide");
-    $("body").removeClass("index-image").addClass("background-blurry");
+    $("body").removeClass("background-clear").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
     $("#timer-btn").removeClass("hide");
 };
@@ -81,11 +73,11 @@ function setNextQuestion() {
     document.getElementById("counter").innerHTML = currentQuestionIndex;
     const questionNumber= Math.floor(Math.random() * allQuestions.length);
     currentQuestion = allQuestions[questionNumber];
-    question.innerText = currentQuestion.question;
+    question.innerHTML = currentQuestion.question;
 
     answerButtons.forEach(answer => {
         const answerNumber = answer.dataset["number"];
-        answer.innerText = currentQuestion["answer" + answerNumber];
+        answer.innerHTML = currentQuestion["answer" + answerNumber];
       });
 
     allQuestions.splice(questionNumber, 1);
@@ -178,7 +170,7 @@ function questionsToCategories() {
     categoriesCard.classList.remove("hide")
     restartButton.className = "question-btn btn wrong hide";
     document.body.classList.remove("background-blurry")
-    document.body.classList.add("index-image")
+    document.body.classList.add("background-clear", "background-positioning")
     $(".answer").removeClass("wrong").removeClass("correct");
     enableAnswers(answerButtons);
 };
@@ -187,14 +179,14 @@ function victoryScreen() {
     $("#link-victory").addClass("hide");
     $("#question-wrapper").addClass("hide");
     $("#victory").removeClass("hide");
-    $("body").removeClass("background-blurry").addClass("index-image");
+    $("body").removeClass("background-blurry").addClass("background-clear");
 };
 
 $("#again").click(function() {
   
   $("#victory").addClass("hide");
   $("#categories").removeClass("hide");
-  $("body").removeClass("background-blurry").addClass("index-image");
+  $("body").removeClass("background-blurry").addClass("background-clear");
   $("#question-counter").addClass("hide");
   questions.length = 0;
 });
