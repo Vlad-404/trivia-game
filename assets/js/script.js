@@ -7,7 +7,7 @@ let currentQuestion = {};
 let allQuestions = [];
 let questions = [];
 let chooseAnswers = true;
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 3;
 let currentQuestionIndex;
 let categoryNumber;
 
@@ -25,7 +25,7 @@ $(".category-btn").click(function() {
 });
 
 function fetchQuestions(categoryNumber) {
-    fetch(`https://opentdb.com/api.php?amount=10&category=${categoryNumber}&difficulty=easy&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=3&category=${categoryNumber}&difficulty=easy&type=multiple`)
     .then(res => {
         return res.json();
     })
