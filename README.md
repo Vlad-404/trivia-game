@@ -60,7 +60,7 @@ Before starting this project, some research and these steps were taken:
 
 After the initial idea, I decided to make a couple of sketches and make wireframes for different platforms to have an idea how the page will look like on different platforms. Software used for generating mockups was [Balsamiq](https://balsamiq.com/?gclid=EAIaIQobChMIzK-ozrWk6QIVF-vtCh1l-woMEAAYASAAEgJ_vvD_BwE). 
 
-I decided to opt out of Bootstrap as the page is simple enough to have my own code and don't have a clash with Bootstrap on any of my own classes. That's why I have only one simple media querry which proved to be simple and effective enough.
+I decided to opt out of Bootstrap as the page is simple enough to have my own code. That's why I have only one media querry which proved to be simple and effective enough.
 
 You can find all the wireframes in the [wireframes](https://github.com/Vlad-404/trivia-game/tree/master/wireframes) folder.
 
@@ -89,9 +89,9 @@ The following fonts were chosen for the game:
 
 Choice of colours were brought down to a minimum as game of this kind needs just a handfull of colours .
 
-* *blue #33BBFF* - used for answer buttons, start and victory screen buttons
-* *green #33FF88* - used for Next button and to color the right answer after clicking on it
-* *red #FF3333* - used for reset (incorrect) button, to color the wrong answer after clicking on it and to colorTime's up button when timer runs out.
+* **_blue #33BBFF_** - used for answer buttons, start and victory screen buttons
+* **_green #33FF88_** - used for Next button and to color the right answer after clicking on it
+* **_red #FF3333_** - used for reset (incorrect) button, to color the wrong answer after clicking on it and to colorTime's up button when timer runs out.
 
 I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
 
@@ -120,60 +120,62 @@ Trivia games have a simple nature so this project was focused on basic things wo
 ## Libraries and tools
 
 * [Git](https://git-scm.com/)
-* [JQuerry](https://jquery.com/)
+* [jQuery](https://jquery.com/)
 * [Font Awesome](https://fontawesome.com/)
 * [Google Fonts](https://fonts.google.com/)
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Gitpod](https://www.gitpod.io/)
 
 # Testing
 
 ### Bugs during development
 
-<strong>List of bugs found:</strong>
+**List of bugs found:**
 
-* <strong>Problem:</strong> Certain parts of code didn't work
-    * <strong>How I found it:</strong> found out when code didn't execute
-    * <strong>What went wrong:</strong> found out that multiple elements had the same ID
-    * <strong>Resolution:</strong> changed the ID's of the elements affected
-* <strong>Problem:</strong> Gitpod didn't load latest commits after I came back to it a day after
-    * <strong>How I found it:</strong> when I opened Gitpod, nothing I was working last session didn't load
-    * <strong>What went wrong:</strong> an issue with Gitpod or my browser local storage
-    * <strong>Resolution:</strong> pulled the latest changes from Github
-* <strong>Problem:</strong> After wining the game, select another category button (```#again```) didn't work
-    * <strong>How I found it:</strong> only when checking the code with dev tools
-    * <strong>What went wrong:</strong> when devtools were displayed at the bottom of the page, question counter div was covering the button
-    * <strong>Resolution:</strong> increased the z-index of the button
-* <strong>Problem:</strong> a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
-    * <strong>How I found it:</strong> found it by loading the page next day
-    * <strong>What went wrong:</strong> missing ```/``` (slash) on closing button (```</button>```) element in HTML
-    * <strong>Resolution:</strong> added ```/``` (slash) to a closing restart button
-* <strong>Problem:</strong> Countdown timer didn't work
-    * <strong>How I found it:</strong> after loading the questions page, there was no countdown 
-    * <strong>What went wrong:</strong> Uncaught ReferenceError: timeleft is not defined - in script.js
-    * <strong>Resolution:</strong> corrected ```time```<strong>L</strong>```eft``` variable to ```time```<strong>l</strong>```eft``` (capitalization)
-* <strong>Problem:</strong> Countdown timer didn't reset after clicking anything but "Time's Up!" button
-    * <strong>How I found it:</strong> after clicking on "Incorrect!" and "Correct!" buttons I could see 2 countdowns competing
-    * <strong>What went wrong:</strong> reseting countdown wasn't implemented correctly (in the right place)
-    * <strong>Resolution:</strong> added ```clearTimeout``` method to ```countdownTimer``` within the ```setTimer``` function. ```clearTimeout``` was triggered by clicking on any answer
-* <strong>Problem:</strong> Issues with awaiting for the data from api to be ready
-    * <strong>How I found it:</strong> when expecting the question, nothing was shown
-    * <strong>What went wrong:</strong> sync issues: local code was executing faster than api could load the data
-    * <strong>Resolution:</strong> put the fetch function inside ```fetchQuestions``` function to be triggered on click event.
-* <strong>Problem:</strong> After answering incorrectly, when restarting the game, checking for the correct answer and selecting the answer didn't work
-    * <strong>How I found it:</strong> after choosing an incorrect answer and restarting the game
-    * <strong>What went wrong:</strong> answer buttons weren't selectable
-    * <strong>Resolution:</strong> added function ```enableAnswers``` which contrasted ```disableOtherAnswers``` function
-* <strong>Problem:</strong> After achieving the victory and restarting the game, correct answer counter did not show
-    * <strong>How I found it:</strong> after winning and restarting the game
-    * <strong>What went wrong:</strong> one of the methods in ```#again``` button click event, hid the inner class of ```#question-counter``` container
-    * <strong>Resolution:</strong> removed the method that hid the inner container (learned the importance of consistency)
-* <strong>Problem:</strong> When <strong>selecting the wrong answer</strong>, correct answer counter (```#question-counter```) disappeared
-    * <strong>How I found it:</strong> found it when clicking on a wrong answer
-    * <strong>What went wrong:</strong> in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
-    * <strong>Resolution:</strong> removed the method in ```wrongAnswer``` function 
-* <strong>Problem:</strong> Timer button is selectable in certain cases
-    * <strong>How I found it:</strong> when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection
-    * <strong>What went wrong:</strong> looking for cause...
-    * <strong>Resolution:</strong> looking for a solution...
+* **Problem:** Certain parts of code didn't work
+    * **How I found it:** found out when code didn't execute
+    * **What went wrong:** found out that multiple elements had the same ID
+    * **Resolution:** changed the ID's of the elements affected
+* **Problem:** Gitpod didn't load latest commits after I came back to it a day after
+    * **How I found it:** when I opened Gitpod, nothing I was working last session didn't load
+    * **What went wrong:** an issue with Gitpod or my browser local storage
+    * **Resolution:** pulled the latest changes from Github
+* **Problem:** After wining the game, select another category button (```#again```) didn't work
+    * **How I found it:** only when checking the code with dev tools
+    * **What went wrong:** when devtools were displayed at the bottom of the page, question counter div was covering the button
+    * **Resolution:** increased the z-index of the button
+* **Problem:** a button appeared next to the counter button. There was no trace of it in JS or HTML, just in dev tools in the browser. Tested on Chrome, Opera and Firefox
+    * **How I found it:** found it by loading the page next day
+    * **What went wrong:** missing ```/``` (slash) on closing button (```</button>```) element in HTML
+    * **Resolution:** added ```/``` (slash) to a closing restart button
+* **Problem:** Countdown timer didn't work
+    * **How I found it:** after loading the questions page, there was no countdown 
+    * **What went wrong:** Uncaught ReferenceError: timeleft is not defined - in script.js
+    * **Resolution:** corrected ```time```**L**```eft``` variable to ```time```**l**```eft``` (capitalization)
+* **Problem:** Countdown timer didn't reset after clicking anything but "Time's Up!" button
+    * **How I found it:** after clicking on "Incorrect!" and "Correct!" buttons I could see 2 countdowns competing
+    * **What went wrong:** reseting countdown wasn't implemented correctly (in the right place)
+    * **Resolution:** added ```clearTimeout``` method to ```countdownTimer``` within the ```setTimer``` function. ```clearTimeout``` was triggered by clicking on any answer
+* **Problem:** Issues with awaiting for the data from api to be ready
+    * **How I found it:** when expecting the question, nothing was shown
+    * **What went wrong:** sync issues: local code was executing faster than api could load the data
+    * **Resolution:** put the fetch function inside ```fetchQuestions``` function to be triggered on click event.
+* **Problem:** After answering incorrectly, when restarting the game, checking for the correct answer and selecting the answer didn't work
+    * **How I found it:** after choosing an incorrect answer and restarting the game
+    * **What went wrong:** answer buttons weren't selectable
+    * **Resolution:** added function ```enableAnswers``` which contrasted ```disableOtherAnswers``` function
+* **Problem:** After achieving the victory and restarting the game, correct answer counter did not show
+    * **How I found it:** after winning and restarting the game
+    * **What went wrong:** one of the methods in ```#again``` button click event, hid the inner class of ```#question-counter``` container
+    * **Resolution:** removed the method that hid the inner container (learned the importance of consistency)
+* **Problem:** When **selecting the wrong answer**, correct answer counter (```#question-counter```) disappeared
+    * **How I found it:** found it when clicking on a wrong answer
+    * **What went wrong:** in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
+    * **Resolution:** removed the method in ```wrongAnswer``` function 
+* **Problem:** Timer button is selectable in certain cases
+    * **How I found it:** when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection
+    * **What went wrong:** looking for cause...
+    * **Resolution:** looking for a solution...
 
 ## User stories Testing
 
@@ -192,17 +194,17 @@ Trivia games have a simple nature so this project was focused on basic things wo
 
 # Deployment
 
-Trivia game was developed on GitPod and VS code, using git and GitHub to host the repository.
+Trivia game was developed on [GitPod](https://www.gitpod.io/) and [VS code](https://code.visualstudio.com/), using git and GitHub to host the repository.
 
 When deploying Trivia Game using GitHub Pages the following steps were made:
 
-* Opened up <strong>[GitHub](github.com)</strong> in the browser.
+* Opened up **[GitHub](github.com)** in the browser.
 * Signed in using username and password.
-* Selected my <strong>repositories</strong>.
-* Navigated to <strong>'/Vlad-404/trivia-game'</strong>.
-* In the top navigation clicked <strong>'settings'</strong>.
-* Scrolled down to the <strong>GitHub Pages</strong> area. 
-* Selected <strong>'Master Branch'</strong> from the <strong>'Source'</strong> dropdown menu.
+* Selected my **repositories**.
+* Navigated to **'/Vlad-404/trivia-game'**.
+* In the top navigation clicked **'settings'**.
+* Scrolled down to the **GitHub Pages** area. 
+* Selected **'Master Branch'** from the **'Source'** dropdown menu.
 * Clicked to confirm my selection.
 * Trivia game is now live on GitHub Pages.
 
@@ -211,11 +213,11 @@ When deploying Trivia Game using GitHub Pages the following steps were made:
 Cloning trivia game from GitHub:
 
 * Navigate to github.com/Vlad-404/trivia-game.
-* Click the green '<strong>Clone or Download</strong>' button.
-* <strong>Copy</strong> the url in the dropdown box.
-* Using your favourite IDE, <strong>open up</strong> your preferred terminal.
-* <strong>Navigate</strong> to your desired file location.
-* <strong>Copy</strong> the following code and input it into your terminal to clone trivia game.
+* Click the green '**Clone or Download**' button.
+* **Copy** the url in the dropdown box.
+* Using your favourite IDE, **open up** your preferred terminal.
+* **Navigate** to your desired file location.
+* **Copy** the following code and input it into your terminal to clone trivia game.
 
     ```git clone https://github.com/Geomint/holiday-destinations.git```
 
