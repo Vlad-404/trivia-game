@@ -10,12 +10,16 @@ let chooseAnswers = true;
 const MAX_QUESTIONS = 3;
 let currentQuestionIndex;
 let categoryNumber;
+let countdownTimer;
 
 $("#start-button").click(function() {
   $("#welcome").addClass("hide");
   $("#categories").removeClass("hide");
 });
 
+/**
+ * When category is selected, changes the UI, resets the currentQuestionIndex and runs the fetchQuestions function
+ */
 $(".category-btn").click(function() {
   let categoryNumber = this.getAttribute("data-category");
   $("#categories").addClass("hide");
@@ -24,6 +28,10 @@ $(".category-btn").click(function() {
   fetchQuestions(categoryNumber);
 });
 
+/**
+ * Gets the questions from API and makes them usable by the script
+ * @param {number} categoryNumber - category number from a selected button
+ */
 function fetchQuestions(categoryNumber) {
     fetch(`https://opentdb.com/api.php?amount=3&category=${categoryNumber}&difficulty=easy&type=multiple`)
     .then(res => {
@@ -31,14 +39,29 @@ function fetchQuestions(categoryNumber) {
     })
     .then(loadedQuestions => {
         console.log(loadedQuestions.results);
+        /**
+         * Takes all the results from API, and translates them into question array usable by the game
+         */
         questions = loadedQuestions.results.map( loadedQuestions => {
+            /**
+             * Formats the questions
+             * @param {object} formattedQuestion Gets the question from API results
+             */
             const formattedQuestion = {
                 question: loadedQuestions.question
             };
+            /**
+             * Takes all the answers from API results, puts them together, shuffles them and translates them into question array usable by the game
+             * @param {Array} eachAnswer Array of incorrect answers
+             */
             const eachAnswer = [...loadedQuestions.incorrect_answers];
             formattedQuestion.rightAnswer = Math.floor(Math.random()*3) + 1;
             eachAnswer.splice(formattedQuestion.rightAnswer -1, 0, loadedQuestions.correct_answer);
 
+            /**
+             * Gets the correct answer
+             * @param {string} rightAnswer correct answer
+             */
             eachAnswer.forEach((rightAnswer, index) => {
                 formattedQuestion["answer" + (index+1)] = rightAnswer;
             })
@@ -52,6 +75,9 @@ function fetchQuestions(categoryNumber) {
     });
 };
 
+/**
+ * Sets the user interface
+ */
 function setQuestionUI() {
     $("#loading-screen").addClass("hide");
     $("body").removeClass("background-clear").addClass("background-blurry");
@@ -59,36 +85,65 @@ function setQuestionUI() {
     $("#timer-btn").removeClass("hide");
 };
 
+/**
+ * Sets the current question index and defines the questions, then hands it over to setNextQuestion function. Available only on category selection
+ */
 function setFirstQuestion() {
     currentQuestionIndex = 0;
     allQuestions = [...questions];
     setNextQuestion();
 };
 
+/**
+ * Sets the questions and answers
+ */
 function setNextQuestion() {
+    /**
+     * Checks if we reached maximum nuber of questions or ran out of questions, then returns victory screen
+     * @param {number} MAX_QUESTIONS Maximum nuber of questions
+     */
     if(allQuestions.length === 0 || currentQuestionIndex >= MAX_QUESTIONS) {
         return victoryScreen();
     }
     currentQuestionIndex++;
+    /**
+     * Shows the number for current question in bottom right corner. Relevant for point system
+     */
     document.getElementById("counter").innerHTML = currentQuestionIndex;
+
+    /**
+     * Shuffles the questions and inserts the string for question in DOM
+     * @param {number} questionNumber Selects a random number between 0 and allQuestions length
+     * @param {string} currentQuestion Takes a question from allQuestions based on questionNumber
+     * @param {array} allQuestions array of all questions
+     */
     const questionNumber= Math.floor(Math.random() * allQuestions.length);
     currentQuestion = allQuestions[questionNumber];
     question.innerHTML = currentQuestion.question;
 
+    /**
+     * Assigns each answer to a button from currentQuestion array
+     */
     answerButtons.forEach(answer => {
         const answerNumber = answer.dataset["number"];
         answer.innerHTML = currentQuestion["answer" + answerNumber];
       });
-
+    
+    /**
+     * Removes the current question from allQuestions so it does not appear again
+     */
     allQuestions.splice(questionNumber, 1);
 
     chooseAnswers = true;
     setTimer()
 };
 
-// Countdown timer
-let countdownTimer;
-
+/**
+ * Sets up the timer
+ * If time is between 1 and 15, it displays the countdown
+ * If time runs out, adds class of wrong for the button, replaces the timer with "Time's up!" text and when clicked, goes back to category selection 
+ * Clicking on any answer resets the timer
+ */
 function setTimer() {
     timerButton.innerHTML = "15 s"
     let timeleft = 14;
@@ -107,19 +162,32 @@ function setTimer() {
     }
     timeleft--;
     }, 1000);
+    /**
+     * Resets the timer when answer buttons are clicked
+     */
     $(".answer").click(function() {
         clearTimeout(countdownTimer);
     });
 };
-
+/**
+ * Checks if the answer is correct or not and changes the UI accordingly
+ */
 answerButtons.forEach(answer => {
     answer.addEventListener('click', e => {
         if(!chooseAnswers) return;
 
+        /**
+         * Checks which button is clicked
+         */
         chooseAnswers = false;
         const selectedButton = e.target;
         const selectedAnswer = selectedButton.dataset["number"];
 
+        /**
+         * Checks if the selected button contains right answer
+         * If right answer is selected, shows next question button, hides timer, and removes the class of correct when next question button is clicked
+         * Else, triggers wrongAnswer function
+         */
         let classToApply = 'wrong';
             if (selectedAnswer == currentQuestion.rightAnswer) {
                 classToApply = 'correct';
@@ -134,12 +202,13 @@ answerButtons.forEach(answer => {
                     disableOtherAnswers();
                 };
             
-        
+        /**
+         * Adds apropriate class to clicked answer
+         */
         selectedButton.classList.add(classToApply);
     });
 });
 
-// click on next button
 $("#next-btn").click(function() {
     $("#next-btn").addClass("hide");
     $("#timer-btn").removeClass("hide");
@@ -147,23 +216,32 @@ $("#next-btn").click(function() {
     setNextQuestion();
 });
 
-// Go back to category selection after failed answer or timed out
+/**
+ * Go back to category selection after failed answer or timed out
+ */
 function wrongAnswer() {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
 };
 
-// After clicking an answer, disable other ones
+/**
+ * After clicking an answer, disable others
+ */
 function disableOtherAnswers() {
     $(".answer").not(this).prop("disabled", true);
 };
 
+/**
+ * After restarting the game or clicking on next question button, makes answer buttons selectable again
+ */
 function enableAnswers() {
     $(".answer").prop("disabled", false);
 };
 
-// Returns the player to category selection
+/**
+ * After winning the game, returns the player to category selection
+ */
 function questionsToCategories() {
     const categoriesCard = document.getElementById("categories")
     questionWrapper.classList.add("hide")
@@ -175,6 +253,9 @@ function questionsToCategories() {
     enableAnswers(answerButtons);
 };
 
+/**
+ * Show the victory screen and hides all others
+ */
 function victoryScreen() {
     $("#link-victory").addClass("hide");
     $("#question-wrapper").addClass("hide");
@@ -182,6 +263,9 @@ function victoryScreen() {
     $("body").removeClass("background-blurry").addClass("background-clear");
 };
 
+/**
+ * Returns user to the category selection when #again button is clicked
+ */
 $("#again").click(function() {
   
   $("#victory").addClass("hide");

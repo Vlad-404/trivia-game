@@ -89,9 +89,9 @@ The following fonts were chosen for the game:
 
 Choice of colours were brought down to a minimum as game of this kind needs just a handfull of colours .
 
-* **_blue #33BBFF_** - used for answer buttons, start and victory screen buttons
-* **_green #33FF88_** - used for Next button and to color the right answer after clicking on it
-* **_red #FF3333_** - used for reset (incorrect) button, to color the wrong answer after clicking on it and to colorTime's up button when timer runs out.
+* ```blue #33BBFF``` - used for answer buttons, start and victory screen buttons
+* ```green #33FF88``` - used for Next button and to color the right answer after clicking on it
+* ```red #FF3333``` - used for reset (incorrect) button, to color the wrong answer after clicking on it and to colorTime's up button when timer runs out.
 
 I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
 
