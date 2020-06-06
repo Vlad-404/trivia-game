@@ -191,6 +191,7 @@ Trivia games have a simple nature so this project was focused on basic things wo
 ## Left out implementations
 
 * alert mechanic to warn people from going back, forward or reloading the page once they start the game. Once user tries to reload the page(either by going back or reloading the page), warning is displayed and if user chooses to ignore it, page reloads and progress is reset. Due to time and my knowledge limitations, it was left out.
+* optimisations for screens larger than HD (1920 x 1080 px)
 
 # Deployment
 

@@ -32,7 +32,7 @@ $(".category-btn").click(function() {
  * Gets the questions from API and makes them usable by the script
  * @param {number} categoryNumber - category number from a selected button
  */
-function fetchQuestions(categoryNumber) {
+const fetchQuestions = (categoryNumber) => {
     fetch(`https://opentdb.com/api.php?amount=3&category=${categoryNumber}&difficulty=easy&type=multiple`)
     .then(res => {
         return res.json();
@@ -78,7 +78,7 @@ function fetchQuestions(categoryNumber) {
 /**
  * Sets the user interface
  */
-function setQuestionUI() {
+const setQuestionUI = () => {
     $("#loading-screen").addClass("hide");
     $("body").removeClass("background-clear").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
@@ -88,7 +88,7 @@ function setQuestionUI() {
 /**
  * Sets the current question index and defines the questions, then hands it over to setNextQuestion function. Available only on category selection
  */
-function setFirstQuestion() {
+const setFirstQuestion = () => {
     currentQuestionIndex = 0;
     allQuestions = [...questions];
     setNextQuestion();
@@ -97,7 +97,7 @@ function setFirstQuestion() {
 /**
  * Sets the questions and answers
  */
-function setNextQuestion() {
+let setNextQuestion = () => {
     /**
      * Checks if we reached maximum nuber of questions or ran out of questions, then returns victory screen
      * @param {number} MAX_QUESTIONS Maximum nuber of questions
@@ -144,19 +144,26 @@ function setNextQuestion() {
  * If time runs out, adds class of wrong for the button, replaces the timer with "Time's up!" text and when clicked, goes back to category selection 
  * Clicking on any answer resets the timer
  */
-function setTimer() {
+let setTimer = () => {
     timerButton.innerHTML = "15 s"
     let timeleft = 14;
     let countdownTimer = setInterval(function(){
         if(timeleft <= 0){
             clearInterval(countdownTimer);
-            document.getElementById("timer-btn").innerHTML = "Time's up!";
+            document.getElementById("timer-btn").innerHTML = "Time's up! Click to restart";
             timerButton.classList.add("wrong")
             $(".answer").prop("disabled", true);
+            $("#timer-btn").click(function() {
+                timerButton.classList.remove("wrong");
+                //let timeleft = 14;
+                //clearTimeout(countdownTimer);
+                questionsToCategories();
+            }); /*
             timerButton.addEventListener("click", function(){
                 timerButton.classList.remove("wrong");
+                clearTimeout(countdownTimer);
                 questionsToCategories();
-            })
+            })*/
         } else {
             document.getElementById("timer-btn").innerHTML = timeleft + " s";
     }
@@ -219,7 +226,7 @@ $("#next-btn").click(function() {
 /**
  * Go back to category selection after failed answer or timed out
  */
-function wrongAnswer() {
+const wrongAnswer = () => {
     timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
@@ -228,27 +235,27 @@ function wrongAnswer() {
 /**
  * After clicking an answer, disable others
  */
-function disableOtherAnswers() {
+const disableOtherAnswers = () => {
     $(".answer").not(this).prop("disabled", true);
 };
 
 /**
  * After restarting the game or clicking on next question button, makes answer buttons selectable again
  */
-function enableAnswers() {
+const enableAnswers = () => {
     $(".answer").prop("disabled", false);
 };
 
 /**
  * After winning the game, returns the player to category selection
  */
-function questionsToCategories() {
-    const categoriesCard = document.getElementById("categories")
+const questionsToCategories = () => {
+    document.getElementById("categories").classList.remove("hide")
     questionWrapper.classList.add("hide")
-    categoriesCard.classList.remove("hide")
+    //categoriesCard.classList.remove("hide")
     restartButton.className = "question-btn btn wrong hide";
     document.body.classList.remove("background-blurry")
-    document.body.classList.add("background-clear", "background-positioning")
+    document.body.classList.add("background-clear")
     $(".answer").removeClass("wrong").removeClass("correct");
     enableAnswers(answerButtons);
 };
@@ -256,7 +263,7 @@ function questionsToCategories() {
 /**
  * Show the victory screen and hides all others
  */
-function victoryScreen() {
+const victoryScreen = () => {
     $("#link-victory").addClass("hide");
     $("#question-wrapper").addClass("hide");
     $("#victory").removeClass("hide");
