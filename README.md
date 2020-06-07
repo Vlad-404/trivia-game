@@ -2,7 +2,7 @@
 
 ![Desktop Demo](https://github.com/Vlad-404/trivia-game/blob/master/assets/images/mockup.JPG "Desktop Demo")
 
-Are you ready to become rich...in knowledge? Then look no further, as this trivia game will test your knowledge in 4 different categories. 
+>Are you ready to become **rich**...in knowledge? Then look no further, as this trivia game will test your knowledge in 4 different categories. 
 
 Welcome to the first game I made. I hope you will enjoy it.
 
@@ -42,11 +42,11 @@ Targeted audience is everyone over the age of 16, as some questions won't be fam
 This project will provide a good fun and be interesting to users because of the following:
 
 * 4 different categories so users can chose what suits them best.
-* replayability - after one category is finished, they have an option to chose another one.
-* open database can keep questions comming and surprise even returning visitors.
-* game can be played with unlimited number of people and correct question counter can be used as a point system.
-* attractive design makes the game simple to use.
-* it can be played on a large screen(desktop), with a tablet or a mobile phone
+* Replayability - after one category is finished, they have an option to chose another one.
+* Open database can keep questions comming and surprise even returning visitors.
+* Game can be played with unlimited number of people and correct question counter can be used as a point system.
+* Attractive design makes the game simple to use.
+* It can be played on a large screen(desktop), with a tablet or a mobile phone
 
 After visiting this page, users will be more knowledgable in selected categories.
 
@@ -54,10 +54,10 @@ After visiting this page, users will be more knowledgable in selected categories
 
 Before starting this project, some research and these steps were taken:
 
-* as I had 2 topics to chose from, mentor input helped out a lot to chose this type of project.
-* looking for videos on YouTube to find the best approach to the subject
-* mockups were generated to have an idea how the game will look like on different platforms. You can find them in folder [Wireframes](https://github.com/Vlad-404/trivia-game/tree/master/wireframes)
-* after find the right API for the questions database, these categories were chosen: general knowledge, games, geography and television.
+* As I had 2 topics to chose from, mentor input helped out a lot to chose this type of project.
+* Looking for videos on YouTube to find the best approach to the subject
+* Mockups were generated to have an idea how the game will look like on different platforms. You can find them in folder [Wireframes](https://github.com/Vlad-404/trivia-game/tree/master/wireframes)
+* After find the right API for the questions database, these categories were chosen: general knowledge, games, geography and television.
 
 ### Wireframes
 
@@ -104,9 +104,9 @@ I opted for bright colours for buttons, as the background is fairly dark and it 
 
 Trivia games have a simple nature so this project was focused on basic things working as best as possible:
 
-* one screen leads you seemlesly into another one so there is no need for navigation. Each button leads you to only logicall place you can go, i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is accessible only when page is (re)loaded, and it is irrelevant once you start the game.
-* there is a correct answer counter and total number of questions so this game can be played even with multiple people. Correct answers can be used as a point system in possible multiplayer environment.
-* correct answer wasn't offered once user selects the wrong one. I wanted to discourage the user from getting the correct answer from the game by cheating, and using it later.
+* One screen leads you seemlesly into another one so there is no need for navigation. Each button leads you to only logicall place you can go, i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is accessible only when page is (re)loaded, and it is irrelevant once you start the game.
+* There is a correct answer counter and total number of questions so this game can be played even with multiple people. Correct answers can be used as a point system in possible multiplayer environment.
+* Correct answer wasn't offered once user selects the wrong one. I wanted to discourage the user from getting the correct answer and using it later.
 
 ## Features left to implement
 
@@ -142,12 +142,13 @@ Trivia games have a simple nature so this project was focused on basic things wo
 Testing was conducted using different web browsers and platforms:
 
 * Website was tested with Google Chrome, Opera and Firefox and they had no issues displaying the page. All transitions and custom effects were working as they are intended
-* tested the page with different Android phones, different versions of iPhone (version 6 and newer), iPad mini and the page was displaying without issues
-* tested the page on 4k screen and the UI was too small. This was left out for future implementations
-* both HTML, CSS and JS validator were used to verify the website code:
+* Tested the page with different Android phones, different versions of iPhone (version 6 and newer), iPad mini and the page was displaying without issues
+* When testing the page on a mobile device, I noticed that if question container is too high, it covers the point counter at the bottom of the screen. I added bottom margin of 5 rem to the question wrapper.
+* Tested the page on 4k screen and the UI was too small. This was left out for future implementations (see [Left out implementations](https://github.com/Vlad-404/trivia-game#left-out-implementations))
+* HTML, CSS and JS validator were used to verify the website code:
     * [CSS validator](https://jigsaw.w3.org/css-validator/validator) - displayed a series of parse errors. After examination, they weren't critical nor they posed any concern
     * [HTML validator](https://validator.w3.org/#validate_by_input) - returned no errors
-    * [JSHint](https://jshint.com) - was showing JavaScript code errors related to incompatibility with versions older than ES6
+    * [JSHint](https://jshint.com) - was showing JavaScript code errors related to incompatibility with versions older than ES6. These were ignored
 
 
 ## Testing during development
@@ -202,18 +203,18 @@ Testing was conducted using different web browsers and platforms:
 ## User stories Testing
 
 1. As a user, I want to be able to play a simple trivia game without too much hassle.
-    * game was made so that the navigation is unnecessary, as each time user is presented with a choice, it leads user to only logical place. i.e. victory screen leads you to category selection, right answer leads you to next question, Welcome page is inaccessible once you start the game as it is irrelevant once you start.
+    * Game was made so that the **navigation is unnecessary**, as each time user is presented with a choice, it leads user to only logical place. i.e. victory screen leads you to category selection, right answer leads you to next question, Welcome page is inaccessible once you start the game as it is irrelevant once you start.
 2. As a new visitor to the page, I wanted to find a simple game of trivia so I can add some additional entertainment for us and our guests.
-    * a competitive feature was added in a shape of correct answer counter. This can be used a point system in multiplayer environment.
+    * a competitive feature was added in a shape of **correct answer counter**. This can be used a _point system_ in multiplayer environment.
 3. As a returning visitor, I don't want to have same questions over and over again, but instead, I want new ones.
-    * chosen database/API have lots of different questions with different difficulties. Each time game randomly pulls a question in regard to the difficulty so each game has different questions each time it's started
+    * chosen **database/API has lots of different questions with different difficulties**. Each time game randomly pulls a question in regard to the difficulty so each game has different questions every time it's started
 4. As a new user, I want to find a way to compete in knowledge with certain topics, so my freind and I can finally find out who knows games better.
-    * as explained in 2nd point of user stories, correct answer counter was added to serve as a point system. Person who has more points, wins.
+    * as explained in 2nd point of user stories, **correct answer counter** was added to serve as a _point system_. Person who has more points, wins.
 
 ## Left out implementations
 
-* alert mechanic to warn people from going back, forward or reloading the page once they start the game. Once user tries to reload the page(either by going back or reloading the page), warning is displayed and if user chooses to ignore it, page reloads and progress is reset. Due to time and my knowledge limitations, it was left out.
-* optimisations for screens larger than HD (1920 x 1080 px)
+* **Alert mechanic** to warn people from going back, forward or reloading the page once they start the game. Once user tries to reload the page(either by going back or reloading the page), warning is displayed and if user chooses to ignore it, page reloads and progress is reset. Due to time and my knowledge limitations, it was left out.
+* Optimisations for **screens larger than HD** (1920 x 1080 px) - due to time constrains, it was left out
 
 [_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
 
@@ -244,7 +245,7 @@ Cloning trivia game from GitHub:
 * **Navigate** to your desired file location.
 * **Copy** the following code and input it into your terminal to clone trivia game.
 
-    ```git clone https://github.com/Geomint/holiday-destinations.git```
+    ```git clone https://github.com/Vlad-404/trivia-game```
 
 [_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
 
@@ -267,12 +268,12 @@ This page was built for educational purposes.
 ## Acknowledgments and thank you's
 
 - Huge thank you to my mentor [Simen](https://github.com/Eventyret) for helping me chose the topic providing a starting resources and helping me along the way.
-- big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who are providing their resources for free.
+- Big thank you to all the people maintaining the [Open trivia DB](https://opentdb.com/) who are providing their resources for free.
 - [Stack Overflow](https://stackoverflow.com/) for hosting helpful discussions which helped me during my project.
 - [WebDev simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw) and [James Q Quick](https://www.youtube.com/channel/UC-T8W79DN6PBnzomelvqJYw) for being an inspiration to build this game.
 - Code institute slack community that was patient enough with my questions.
 
 
->*Thank you for visiting my page and I hope you'll have fun playing the game.*
+>**Thank you for visiting my page and I hope you'll have fun playing the game.**
 
 [_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
