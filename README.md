@@ -2,7 +2,7 @@
 
 ![Desktop Demo](https://github.com/Vlad-404/trivia-game/blob/master/assets/images/mockup.JPG "Desktop Demo")
 
->Are you ready to become **rich**...in knowledge? Then look no further, as this trivia game will test your knowledge in 4 different categories. 
+Are you ready to become **rich**...in knowledge? Then look no further, as this trivia game will test your knowledge in 4 different categories. 
 
 Welcome to the first game I made. I hope you will enjoy it.
 
@@ -274,6 +274,6 @@ This page was built for educational purposes.
 - Code institute slack community that was patient enough with my questions.
 
 
->**Thank you for visiting my page and I hope you'll have fun playing the game.**
+**Thank you for visiting my page and I hope you'll have fun playing the game.**
 
 [_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
