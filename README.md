@@ -20,7 +20,8 @@ Contents:
     * [Features left to implement](https://github.com/Vlad-404/trivia-game#features-left-to-implement)
 * [Technologies used](https://github.com/Vlad-404/trivia-game#technologies-used)
 * Testing
-    * [Testing features](https://github.com/Vlad-404/trivia-game#testing-features)
+    * [Testing the page](https://github.com/Vlad-404/trivia-game#testing-the-page)
+    * [Testing during development](https://github.com/Vlad-404/trivia-game#testing-during-development)
     * [User stories Testing](https://github.com/Vlad-404/trivia-game#user-stories-testing)
     * [Left out implementations](https://github.com/Vlad-404/trivia-game#left-out-implementations)
 * [Deployment](https://github.com/Vlad-404/trivia-game#deployment)
@@ -97,6 +98,8 @@ Choice of colours were brought down to a minimum as game of this kind needs just
 
 I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
 
+[_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
+
 # Features
 
 Trivia games have a simple nature so this project was focused on basic things working as best as possible:
@@ -109,6 +112,8 @@ Trivia games have a simple nature so this project was focused on basic things wo
 
 * **Difficulty increase** - one of the initial ideas was to increase the difficulty after 5 questions, but due to my skills and time restrictions, it was left out.
 * **Timer** - one idea was to give players 15 seconds to answer the question. After 3 weeks of trying to make it work and not being successful, I decided to remove it.
+
+[_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
 
 # Technologies used
 
@@ -128,13 +133,24 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [Gitpod](https://www.gitpod.io/)
 
+[_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
+
 # Testing
 
-## Testing features:
+## Testing the page:
+
+Testing was conducted using different web browsers and platforms:
+
+* Website was tested with Google Chrome, Opera and Firefox and they had no issues displaying the page. All transitions and custom effects were working as they are intended
+* tested the page with different Android phones, different versions of iPhone (version 6 and newer), iPad mini and the page was displaying without issues
+* tested the page on 4k screen and the UI was too small. This was left out for future implementations
+* both HTML, CSS and JS validator were used to verify the website code:
+    * [CSS validator](https://jigsaw.w3.org/css-validator/validator) - displayed a series of parse errors. After examination, they weren't critical nor they posed any concern
+    * [HTML validator](https://validator.w3.org/#validate_by_input) - returned no errors
+    * [JSHint](https://jshint.com) - was showing JavaScript code errors related to incompatibility with versions older than ES6
 
 
-
-### Bugs during development
+## Testing during development
 
 **List of bugs found:**
 
@@ -199,6 +215,8 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * alert mechanic to warn people from going back, forward or reloading the page once they start the game. Once user tries to reload the page(either by going back or reloading the page), warning is displayed and if user chooses to ignore it, page reloads and progress is reset. Due to time and my knowledge limitations, it was left out.
 * optimisations for screens larger than HD (1920 x 1080 px)
 
+[_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
+
 # Deployment
 
 Trivia game was developed on [GitPod](https://www.gitpod.io/) and [VS code](https://code.visualstudio.com/), using git and GitHub to host the repository.
@@ -228,6 +246,8 @@ Cloning trivia game from GitHub:
 
     ```git clone https://github.com/Geomint/holiday-destinations.git```
 
+[_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
+
 # Credits
 
 ## Content
@@ -254,3 +274,5 @@ This page was built for educational purposes.
 
 
 >*Thank you for visiting my page and I hope you'll have fun playing the game.*
+
+[_Back to top_](https://github.com/Vlad-404/trivia-game#trivia-game)
