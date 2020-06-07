@@ -2,15 +2,13 @@ const answerButtons = Array.from(document.getElementsByClassName("answer"));
 const questionWrapper = document.getElementById("question-wrapper");
 const questionCounter = document.getElementById("question-counter");
 const restartButton = document.getElementById("restart-btn");
-const timerButton = document.getElementById("timer-btn");
 let currentQuestion = {};
 let allQuestions = [];
 let questions = [];
 let chooseAnswers = true;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 10;
 let currentQuestionIndex;
 let categoryNumber;
-let countdownTimer;
 
 $("#start-button").click(function() {
   $("#welcome").addClass("hide");
@@ -33,7 +31,7 @@ $(".category-btn").click(function() {
  * @param {number} categoryNumber - category number from a selected button
  */
 const fetchQuestions = (categoryNumber) => {
-    fetch(`https://opentdb.com/api.php?amount=3&category=${categoryNumber}&difficulty=easy&type=multiple`)
+    fetch(`https://opentdb.com/api.php?amount=10&category=${categoryNumber}&difficulty=easy&type=multiple`)
     .then(res => {
         return res.json();
     })
@@ -82,7 +80,6 @@ const setQuestionUI = () => {
     $("#loading-screen").addClass("hide");
     $("body").removeClass("background-clear").addClass("background-blurry");
     $("#question-wrapper").removeClass("hide");
-    $("#timer-btn").removeClass("hide");
 };
 
 /**
@@ -135,47 +132,8 @@ let setNextQuestion = () => {
     allQuestions.splice(questionNumber, 1);
 
     chooseAnswers = true;
-    setTimer()
 };
 
-/**
- * Sets up the timer
- * If time is between 1 and 15, it displays the countdown
- * If time runs out, adds class of wrong for the button, replaces the timer with "Time's up!" text and when clicked, goes back to category selection 
- * Clicking on any answer resets the timer
- */
-let setTimer = () => {
-    timerButton.innerHTML = "15 s"
-    let timeleft = 14;
-    let countdownTimer = setInterval(function(){
-        if(timeleft <= 0){
-            clearInterval(countdownTimer);
-            document.getElementById("timer-btn").innerHTML = "Time's up! Click to restart";
-            timerButton.classList.add("wrong")
-            $(".answer").prop("disabled", true);
-            $("#timer-btn").click(function() {
-                timerButton.classList.remove("wrong");
-                //let timeleft = 14;
-                //clearTimeout(countdownTimer);
-                questionsToCategories();
-            }); /*
-            timerButton.addEventListener("click", function(){
-                timerButton.classList.remove("wrong");
-                clearTimeout(countdownTimer);
-                questionsToCategories();
-            })*/
-        } else {
-            document.getElementById("timer-btn").innerHTML = timeleft + " s";
-    }
-    timeleft--;
-    }, 1000);
-    /**
-     * Resets the timer when answer buttons are clicked
-     */
-    $(".answer").click(function() {
-        clearTimeout(countdownTimer);
-    });
-};
 /**
  * Checks if the answer is correct or not and changes the UI accordingly
  */
@@ -192,14 +150,13 @@ answerButtons.forEach(answer => {
 
         /**
          * Checks if the selected button contains right answer
-         * If right answer is selected, shows next question button, hides timer, and removes the class of correct when next question button is clicked
+         * If right answer is selected, shows next question button, and removes the class of correct when next question button is clicked
          * Else, triggers wrongAnswer function
          */
         let classToApply = 'wrong';
             if (selectedAnswer == currentQuestion.rightAnswer) {
                 classToApply = 'correct';
                 $("#next-btn").removeClass("hide");
-                $("#timer-btn").addClass("hide");
                 $("#next-btn").click(function() {
                     $(".answer").removeClass("correct");
                     });
@@ -218,7 +175,6 @@ answerButtons.forEach(answer => {
 
 $("#next-btn").click(function() {
     $("#next-btn").addClass("hide");
-    $("#timer-btn").removeClass("hide");
     enableAnswers();
     setNextQuestion();
 });
@@ -227,7 +183,6 @@ $("#next-btn").click(function() {
  * Go back to category selection after failed answer or timed out
  */
 const wrongAnswer = () => {
-    timerButton.classList.add("hide")
     restartButton.classList.remove("hide")
     restartButton.addEventListener("click", questionsToCategories)
 };

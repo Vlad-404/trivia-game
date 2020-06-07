@@ -9,25 +9,27 @@ Welcome to the first game I made. I hope you will enjoy it.
 
 Contents:
 * UX (user experience)
-  * Idea
-  * Research and preparations
-    * Wireframes
-  * User stories
-  * Design choices
-    * Fonts
-    * Colours
-* Features
-    * Features left to implement
-* Technologies used
+  * [Idea](https://github.com/Vlad-404/trivia-game#idea)
+  * [Research and preparations](https://github.com/Vlad-404/trivia-game#research-and-preparations)
+    * [Wireframes](https://github.com/Vlad-404/trivia-game#wireframes)
+  * [User stories](https://github.com/Vlad-404/trivia-game#user-stories)
+  * [Design choices](https://github.com/Vlad-404/trivia-game#design-choices)
+    * [Fonts](https://github.com/Vlad-404/trivia-game#fonts)
+    * [Colours](https://github.com/Vlad-404/trivia-game#colours)
+* [Features](https://github.com/Vlad-404/trivia-game#features)
+    * [Features left to implement](https://github.com/Vlad-404/trivia-game#features-left-to-implement)
+* [Technologies used](https://github.com/Vlad-404/trivia-game#technologies-used)
 * Testing
-    * User stories Testing
-    * Left out implementations
-* Deployment
+    * [Testing features](https://github.com/Vlad-404/trivia-game#testing-features)
+    * [User stories Testing](https://github.com/Vlad-404/trivia-game#user-stories-testing)
+    * [Left out implementations](https://github.com/Vlad-404/trivia-game#left-out-implementations)
+* [Deployment](https://github.com/Vlad-404/trivia-game#deployment)
+    * [Running trivia game localy](https://github.com/Vlad-404/trivia-game#running-trivia-game-localy)
 * Credits
-    * Content
-    * Media
-    * Acknowledgments and thank you's
-* Disclaimer
+    * [Content](https://github.com/Vlad-404/trivia-game#content)
+    * [Media](https://github.com/Vlad-404/trivia-game#media)
+    * [Acknowledgments and thank you's](https://github.com/Vlad-404/trivia-game#acknowledgments-and-thank-yous)
+* [Disclaimer](https://github.com/Vlad-404/trivia-game#disclaimer)
 
 # UX 
 
@@ -91,7 +93,7 @@ Choice of colours were brought down to a minimum as game of this kind needs just
 
 * ```blue #33BBFF``` - used for answer buttons, start and victory screen buttons
 * ```green #33FF88``` - used for Next button and to color the right answer after clicking on it
-* ```red #FF3333``` - used for reset (incorrect) button, to color the wrong answer after clicking on it and to colorTime's up button when timer runs out.
+* ```red #FF3333``` - used for reset (incorrect) button, to color the wrong answer after clicking on it
 
 I opted for bright colours for buttons, as the background is fairly dark and it would provide a good contrast with the background.
 
@@ -102,11 +104,11 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * one screen leads you seemlesly into another one so there is no need for navigation. Each button leads you to only logicall place you can go, i.e. victory screen leads you to category selection, right answer leads you to next question,...Welcome page is accessible only when page is (re)loaded, and it is irrelevant once you start the game.
 * there is a correct answer counter and total number of questions so this game can be played even with multiple people. Correct answers can be used as a point system in possible multiplayer environment.
 * correct answer wasn't offered once user selects the wrong one. I wanted to discourage the user from getting the correct answer from the game by cheating, and using it later.
-* a timer is used to give user 12 seconds to read and answer the question. If answer isn't selected in that time, wrong answer screen pops up and points a user to category selection. No answer is selected in this case.
 
 ## Features left to implement
 
-* Difficulty increase - one of the initial ideas was to increase the difficulty after 5 questions, but due to my skills and time restrictions, it was left out.
+* **Difficulty increase** - one of the initial ideas was to increase the difficulty after 5 questions, but due to my skills and time restrictions, it was left out.
+* **Timer** - one idea was to give players 15 seconds to answer the question. After 3 weeks of trying to make it work and not being successful, I decided to remove it.
 
 # Technologies used
 
@@ -127,6 +129,10 @@ Trivia games have a simple nature so this project was focused on basic things wo
 * [Gitpod](https://www.gitpod.io/)
 
 # Testing
+
+## Testing features:
+
+
 
 ### Bugs during development
 
@@ -173,9 +179,9 @@ Trivia games have a simple nature so this project was focused on basic things wo
     * **What went wrong:** in script.js, ```wrongAnswer``` function hid the ```#question-counter```. This function was triggered on clicking any answer button
     * **Resolution:** removed the method in ```wrongAnswer``` function 
 * **Problem:** Timer button is selectable in certain cases
-    * **How I found it:** when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection
+    * **How I found it:** when time runs out on a question, and time's up button is pressed. Once user selects the category again and questions are presented, timer button is selectable. Clicking on it leads user to category selection and resets the progress
     * **What went wrong:** looking for cause...
-    * **Resolution:** looking for a solution...
+    * **Resolution:** removed the timer completely
 
 ## User stories Testing
 
@@ -209,7 +215,7 @@ When deploying Trivia Game using GitHub Pages the following steps were made:
 * Clicked to confirm my selection.
 * Trivia game is now live on GitHub Pages.
 
-### Running trivia game Locally:
+### Running trivia game locally:
 
 Cloning trivia game from GitHub:
 
